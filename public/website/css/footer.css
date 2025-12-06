@@ -1,0 +1,92 @@
+/* Footer Styles */
+.site-footer {
+    background-color: #222;
+    color: #fff;
+    padding-top: 48px;
+    margin-top: 48px;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.footer-links,
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-contact li {
+    color: #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright {
+    color: #aaa;
+}
+
+.payment-icon {
+    height: 24px;
+    width: auto;
+    opacity: 0.8;
+    transition: var(--transition);
+}
+
+.payment-icon:hover {
+    opacity: 1;
+}
+.footer-bottom .footer-payments {
+    display: flex;
+    justify-content: flex-end; /* sağa itələyir */
+    align-items: center;       /* dikey ortalayır */
+    gap: 8px;                  /* şəkillər arasında məsafə */
+}
+
+
