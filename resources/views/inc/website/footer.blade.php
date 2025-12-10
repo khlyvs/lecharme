@@ -45,7 +45,7 @@
             <div class="footer-bottom mt-4 pt-4 border-top">
     <div class="row">
         <div class="col-md-6">
-            <p class="copyright mb-0">© 2025 ecaz.az - Bütün hüquqlar qorunur</p>
+            <p class="copyright mb-0">© {{ date('Y') }} lecharme.az - Bütün hüquqlar qorunur</p>
         </div>
         <div class="col-md-6 footer-payments">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon me-2" width="40">
@@ -64,5 +64,9 @@
 <script src="{{ asset("website/js/bootstrap.bundle.min.js") }}" defer></script>
 <script src="{{ asset("website/js/swiper-bundle.min.js") }}"defer></script>
 <script src="{{ asset("website/js/product-slider.js") }}"defer></script>
+<script src="{{ asset("website/js/register.js") }}"defer></script>
+<script src="{{ asset("website/js/user.js") }}"defer></script>
+<script src="{{ asset("website/js/sweetalert.js") }}"defer></script>
+
 </body>
 </html>

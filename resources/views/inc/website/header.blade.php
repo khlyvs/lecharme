@@ -16,12 +16,16 @@
     <link href="{{ asset("website/css/google-fonts.css") }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-        <link rel="stylesheet" href="{{ asset('website/css/header.css') }}?v={{ time() }}">
-        <link rel="stylesheet" href="{{ asset('website/css/header-slider.css') }}?v={{ time() }}">
-        <link rel="stylesheet" href="{{ asset('website/css/fontawesome-all.min.css') }}?v={{ time() }}">
-        <link rel="stylesheet" href="{{ asset('website/css/swiper-bundle.min.css') }}?v={{ time() }}">
-        <link rel="stylesheet" href="{{ asset('website/css/product-slider.css') }}?v={{ time() }}">
-        <link rel="stylesheet" href="{{ asset('website/css/footer.css') }}?v={{ time() }}">
+     <link rel="stylesheet" href="{{ asset('website/css/header.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/header-slider.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/fontawesome-all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/swiper-bundle.min.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/product-slider.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/footer.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/register.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/user.css') }}">
+
 
 
 
@@ -35,7 +39,7 @@
             <div class="row align-items-center py-3 header-desktop">
                 <!-- Logo -->
                 <div class="col-auto">
-                    <a href="#" class="logo">
+                    <a href="{{ route("dashboard") }}" class="logo">
                         <i class="bi bi-shop"></i>
                         <span>LeCharme</span>
                     </a>
@@ -200,21 +204,46 @@
                         </button>
 
                         <!-- USER BUTTON + DROPDOWN -->
-                        <div class="user-selector">
-                            <button class="action-btn" title="Hesabım" type="button" id="userBtn">
-                                <i class="bi bi-person"></i>
-                            </button>
-                            <div class="user-dropdown" id="userDropdown">
-                                <button class="user-option" onclick="window.location.href='/login'">
-                                    <i class="bi bi-box-arrow-in-right"></i>
-                                    <span>Giriş et</span>
-                                </button>
-                                <button class="user-option" onclick="window.location.href='/register'">
-                                    <i class="bi bi-person-plus"></i>
-                                    <span>Qeydiyyat</span>
-                                </button>
-                            </div>
-                        </div>
+                       <div class="user-selector">
+    <button class="action-btn" title="Hesabım" type="button" id="userBtn">
+        <i class="bi bi-person"></i>
+    </button>
+
+    <div class="user-dropdown" id="userDropdown">
+
+        {{-- Əgər istifadəçi GİRİŞ ETMƏYİBSƏ --}}
+        @guest
+            <a href="{{ route('login-page') }}" class="user-option">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Giriş et</span>
+            </a>
+
+            <a href="{{ route('register-page') }}" class="user-option">
+                <i class="bi bi-person-plus"></i>
+                <span>Qeydiyyat</span>
+            </a>
+        @endguest
+
+        {{-- Əgər istifadəçi GİRİŞ ETMİŞDİRSƏ --}}
+        @auth
+            <a href="{{ route('profile') }}" class="user-option">
+                <i class="bi bi-person-circle"></i>
+                <span>Profilim</span>
+            </a>
+
+            <form action="{{ route("logout") }}" method="post">
+
+                @csrf
+            <button class="user-option" type="submit">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Çıxış</span>
+            </button>
+            </form>
+        @endauth
+
+    </div>
+</div>
+
                     </div>
                 </div>
             </div>
@@ -259,21 +288,50 @@
                                 <span class="badge">3</span>
                             </button>
                             <!-- USER BUTTON + DROPDOWN (Mobile) -->
-                            <div class="user-selector">
+                           <div class="user-selector">
                                 <button class="action-btn" title="Hesabım" type="button" id="userBtnMobile">
                                     <i class="bi bi-person"></i>
                                 </button>
+
                                 <div class="user-dropdown" id="userDropdownMobile">
-                                    <button class="user-option" onclick="window.location.href='/login'">
-                                        <i class="bi bi-box-arrow-in-right"></i>
-                                        <span>Giriş et</span>
-                                    </button>
-                                    <button class="user-option" onclick="window.location.href='/register'">
-                                        <i class="bi bi-person-plus"></i>
-                                        <span>Qeydiyyat</span>
-                                    </button>
+
+                                    @guest
+                                        {{-- login --}}
+                                        <form action="{{ route('login-page') }}">
+                                            <button type="submit" class="user-option">
+                                                <i class="bi bi-box-arrow-in-right"></i>
+                                                <span>Giriş et</span>
+                                            </button>
+                                        </form>
+
+                                        {{-- register --}}
+                                        <form action="{{ route('register-page') }}">
+                                            <button type="submit" class="user-option">
+                                                <i class="bi bi-person-plus"></i>
+                                                <span>Qeydiyyat</span>
+                                            </button>
+                                        </form>
+                                    @endguest
+
+                                    @auth
+                                        <a href="{{ route('profile') }}" class="user-option">
+                                            <i class="bi bi-person-circle"></i>
+                                            <span>Profilim</span>
+                                        </a>
+
+                                        <form action="{{ route("logout") }}" method="post">
+
+                                            @csrf
+                                        <button class="user-option" type="submit">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                            <span>Çıxış</span>
+                                        </button>
+                                        </form>
+                                    @endauth
+
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
