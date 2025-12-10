@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\AuthPageMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-
+use Symfony\Component\Routing\Alias;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
@@ -11,7 +13,20 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'auth.user' => AuthMiddleware::class,
+            'auth.page' => AuthPageMiddleware::class,
+        ]);
+
+        $middleware->group('web', [
+            \Illuminate\Cookie\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ]);
+
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

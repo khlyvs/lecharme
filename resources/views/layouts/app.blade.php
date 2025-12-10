@@ -4,5 +4,3 @@
 @yield("content")
 
 @include("inc.website.footer")
-
-
