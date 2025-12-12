@@ -23,7 +23,7 @@
                     >
                 </div>
                 @error('email')
-                    <div class="error small">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
                 <div id="login__password-group">
                     <label for="password">Şifre</label>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 @error('password')
-                    <div class="error small">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
                 <div id="login__form-options">
                     <label id="login__checkbox-label">
@@ -55,7 +55,7 @@
                     <a href="#" id="login__forgot-password">Şifremi unuttum</a>
                 </div>
                    @error('error')
-                    <div class="error small">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
                 <button type="submit" id="login__submit-btn">
                     <span>Giriş Yap</span>
@@ -69,6 +69,7 @@
                 <span>veya</span>
             </div>
 
+            <a class="a-login"  href="{{ route('google.redirect') }}">
             <button id="googleLogin">
                 <svg width="20" height="20" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -78,7 +79,7 @@
                 </svg>
                 <span>Google ile Giriş Yap</span>
             </button>
-
+            </a>
             <div id="login__signup-link">
                 <p>Hesabınız yok mu? <a href="../register/index.html">Kayıt olun</a></p>
             </div>

@@ -79,33 +79,7 @@
         }, { passive: true });
     }
 
-    // Form submission with debounce protection
-    let isSubmitting = false;
-    if (profileForm && submitBtn) {
-        profileForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Prevent double submission
-            if (isSubmitting) return;
-            isSubmitting = true;
-
-            const span = submitBtn.querySelector('span');
-            if (span) {
-                span.textContent = 'Kaydediliyor...';
-            }
-            submitBtn.disabled = true;
-
-            // Simulate API call
-            setTimeout(() => {
-                if (span) {
-                    span.textContent = submitBtnOriginalText;
-                }
-                submitBtn.disabled = false;
-                isSubmitting = false;
-                alert('Profil bilgileriniz başarıyla güncellendi!');
-            }, 1500);
-        }, { passive: false });
-    }
+  
 
     // Cancel button
     if (cancelBtn && profileForm) {
