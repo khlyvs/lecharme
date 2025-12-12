@@ -7,6 +7,9 @@
     margin: 0 auto;
     padding: 20px;
 }
+.a-login{
+    text-decoration: none;
+}
 
 #login__card {
     background: #ffffff;

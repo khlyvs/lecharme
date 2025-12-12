@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,19 +180,26 @@
                             <button class="action-btn language-btn" type="button" id="languageBtn" title="Dil Seç">
                                 <i class="bi bi-globe"></i>
                             </button>
-                            <div class="language-dropdown" id="languageDropdown">
-                                <button class="lang-option" data-lang="tr">
-                                    <span class="lang-flag">🇹🇷</span>
-                                    <span class="lang-name">Türkçe</span>
-                                </button>
+                            <div class="language-dropdown" id="languageDropdown" data-current-locale="{{ app()->getLocale() }}">
+                                <a class="a-login" href="{{ route('lang.switch','ru') }}">
+                                    <button class="lang-option" data-lang="ru">
+                                        <span class="lang-flag">🇷🇺</span>
+                                        <span class="lang-name">Русский</span>
+                                    </button>
+                                </a>
+
+                                <a class="a-login" href="{{ route('lang.switch','az') }}">
                                 <button class="lang-option" data-lang="az">
                                     <span class="lang-flag">🇦🇿</span>
                                     <span class="lang-name">Azərbaycan</span>
                                 </button>
+                                </a>
+                                <a class="a-login" href="{{ route('lang.switch','en') }}">
                                 <button class="lang-option" data-lang="en">
                                     <span class="lang-flag">🇬🇧</span>
                                     <span class="lang-name">English</span>
                                 </button>
+                                </a>
                             </div>
                         </div>
 
@@ -429,83 +438,6 @@
         </div>
     </header>
 
-    <!-- Catalog Offcanvas Menu -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="catalogMenu" aria-labelledby="catalogMenuLabel" data-bs-backdrop="false">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="catalogMenuLabel">
-                <i class="bi bi-grid-3x3-gap"></i> <span class="catalog-title-text">Kataloq</span>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body p-0">
-            <ul class="category-list" id="categoryList">
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="electronics">
-                        <span>Elektronika</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Telefon & Aksesuar</a></li>
-                        <li><a href="#" class="subcategory-link">Kompyuter & Ofis</a></li>
-                        <li><a href="#" class="subcategory-link">TV & Audio</a></li>
-                        <li><a href="#" class="subcategory-link">Foto & Video</a></li>
-                    </ul>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="appliances">
-                        <span>Məişət Texnikası</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Böyük Texnika</a></li>
-                        <li><a href="#" class="subcategory-link">Kiçik Texnika</a></li>
-                        <li><a href="#" class="subcategory-link">İqlim Texnikası</a></li>
-                    </ul>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="clothing">
-                        <span>Geyim & Ayaqqabı</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Kişi Geyimi</a></li>
-                        <li><a href="#" class="subcategory-link">Qadın Geyimi</a></li>
-                        <li><a href="#" class="subcategory-link">Ayaqqabı</a></li>
-                        <li><a href="#" class="subcategory-link">Aksesuar</a></li>
-                    </ul>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="kids">
-                        <span>Uşaq Məhsulları</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Oyuncaqlar</a></li>
-                        <li><a href="#" class="subcategory-link">Geyim</a></li>
-                        <li><a href="#" class="subcategory-link">Məktəb</a></li>
-                    </ul>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="sports">
-                        <span>İdman & Hobi</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Fitness</a></li>
-                        <li><a href="#" class="subcategory-link">Açıq Hava</a></li>
-                    </ul>
-                </li>
-                <li class="category-item">
-                    <a href="#" class="category-link" data-category="cosmetics">
-                        <span>Kosmetika</span>
-                        <i class="bi bi-chevron-right"></i>
-                    </a>
-                    <ul class="subcategory-menu">
-                        <li><a href="#" class="subcategory-link">Yüz Bakımı</a></li>
-                        <li><a href="#" class="subcategory-link">Saç Bakımı</a></li>
-                        <li><a href="#" class="subcategory-link">Makyaj</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+
+@include('components.catalog-menu')
+

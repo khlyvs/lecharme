@@ -68,10 +68,13 @@
 
         menuState.isTouchDevice = isTouchDevice();
 
-        // Set default language
-        if (cache.allLangOptions.length && !document.querySelector('.lang-option.active')) {
-            const fallback = document.querySelector('.lang-option[data-lang="az"]');
-            if (fallback) fallback.classList.add('active');
+        // Set active language based on current locale
+        if (cache.allLangOptions.length) {
+            const languageDropdown = document.getElementById('languageDropdown');
+            const currentLocale = languageDropdown?.dataset.currentLocale || window.APP_LOCALE || 'az';
+            cache.allLangOptions.forEach(option => {
+                option.classList.toggle('active', option.dataset.lang === currentLocale);
+            });
         }
 
         // ===== SINGLE DOCUMENT CLICK HANDLER (Event Delegation) =====

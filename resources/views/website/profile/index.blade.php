@@ -8,8 +8,8 @@
             <aside id="user__sidebar">
                 <div id="user__profile-header">
 
-                    <h2 id="user__name">Ahmet Yılmaz</h2>
-                    <p id="user__email">ahmet@example.com</p>
+                    <h2 id="user__name">{{$user->name}}</h2>
+                    <p id="user__email">{{$user->email}}</p>
                 </div>
 
                 <nav id="user__nav">
@@ -50,59 +50,86 @@
                         <p id="user__tab-subtitle">Kişisel bilgilerinizi güncelleyin</p>
                     </div>
 
-                    <form id="user__profile-form">
+
                         <div id="user__form-section">
                             <h3 id="user__section-title">Kişisel Bilgiler</h3>
 
                             <div id="user__form-row">
                                 <div id="user__form-group">
                                     <label for="firstName">Ad</label>
-                                    <input type="text" id="firstName" name="firstName" value="Ahmet" required>
+                                    <input type="text" id="firstName" name="firstName" value="{{ $user->name }}" disabled required>
                                 </div>
 
                             </div>
 
                             <div id="user__form-group">
                                 <label for="email">E-posta</label>
-                                <input type="email" id="email" name="email" value="ahmet@example.com" required>
+                                <input type="email" id="email" name="email" value="{{ $user->email }}" disabled required>
                             </div>
 
-                            <div id="user__form-group">
+                            {{-- <div id="user__form-group">
                                 <label for="phone">Telefon</label>
                                 <input type="tel" id="phone" name="phone" value="+90 555 123 4567">
-                            </div>
+                            </div> --}}
 
-                            
+
                         </div>
+                        <form id="user__profile-form" method="post" action="{{ route('reset-credentials') }}">
+    @csrf
 
-                        <div id="user__form-section">
-                            <h3 id="user__section-title">Şifre Değiştir</h3>
+    <div id="user__form-section">
+        <h3 id="user__section-title">Şifre Değiştir</h3>
 
-                            <div id="user__form-group">
-                                <label for="currentPassword">Mevcut Şifre</label>
-                                <input type="password" id="currentPassword" name="currentPassword">
-                            </div>
+        {{-- CURRENT PASSWORD --}}
+        <div id="user__form-group">
+            <label for="current_password">Mevcut Şifre</label>
+            <input type="password"
+                   id="current_password"
+                   name="current_password"
+                   class="@error('current_password') is-invalid @enderror">
 
-                            <div id="user__form-row">
-                                <div id="user__form-group">
-                                    <label for="newPassword">Yeni Şifre</label>
-                                    <input type="password" id="newPassword" name="newPassword">
-                                </div>
-                                <div id="user__form-group">
-                                    <label for="confirmPassword">Yeni Şifre Tekrar</label>
-                                    <input type="password" id="confirmPassword" name="confirmPassword">
-                                </div>
-                            </div>
-                        </div>
+            @error('current_password')
+                <div class="text-danger small mt-1">{{ $message }}</div>
+            @enderror
+        </div>
 
-                        <div id="user__form-actions">
-                            <button type="submit" id="user__save-btn">
-                                <span>Değişiklikleri Kaydet</span>
-                                <i class="bi bi-check-lg"></i>
-                            </button>
-                            <button type="button" id="user__cancel-btn">İptal</button>
-                        </div>
-                    </form>
+        {{-- NEW PASSWORD + CONFIRM --}}
+        <div id="user__form-row">
+            <div id="user__form-group">
+                <label for="password">Yeni Şifre</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="@error('password') is-invalid @enderror">
+
+                @error('password')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div id="user__form-group">
+                <label for="password_confirmation">Yeni Şifre Tekrar</label>
+                <input type="password"
+                       id="password_confirmation"
+                       name="password_confirmation">
+            </div>
+        </div>
+    </div>
+@if(session('success'))
+    <div class="alert alert-success mt-2">
+        {{ session('success') }}
+    </div>
+@endif
+    <div id="user__form-actions">
+        <button type="submit" id="user__save-btn">
+            <span>Değişiklikleri Kaydet</span>
+            <i class="bi bi-check-lg"></i>
+        </button>
+        <button type="button" id="user__cancel-btn">İptal</button>
+    </div>
+</form>
+
+
                 </div>
 
                 <!-- Orders Tab -->
