@@ -67,6 +67,7 @@
 <script src="{{ asset("website/js/register.js") }}"defer></script>
 <script src="{{ asset("website/js/user.js") }}"defer></script>
 <script src="{{ asset("website/js/sweetalert.js") }}"defer></script>
+<script src="{{ asset("website/js/filter.js") }}"defer></script>
 
 
 </body>

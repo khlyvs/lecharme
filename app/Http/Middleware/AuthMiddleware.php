@@ -18,7 +18,7 @@ class AuthMiddleware
     {
 
        if (!Auth::check()) {
-            return redirect()->route('login-page');
+            return redirect()->route('login-page', ['locale' => app()->getLocale()]);
         }
 
         return $next($request);

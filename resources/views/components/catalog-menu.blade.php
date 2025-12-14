@@ -12,7 +12,10 @@
             @foreach($menuCategories ?? [] as $cat)
                 <li class="category-item">
                     <a
-                        href="{{ route('category.show', $cat->localized_slug) }}"
+                        href="{{ route('category.show', [
+                            'locale' => app()->getLocale(),
+                            'slug'   => $cat->localized_slug
+                        ]) }}"
                         class="category-link"
                     >
                         <span>{{ $cat->localized_name}}</span>
@@ -23,6 +26,7 @@
                         @foreach($cat->subcategories ?? [] as $sub)
                             <li> <a
                                     href="{{ route('subcategory.show', [
+                                        'locale' =>app()->getLocale(),
                                         'categorySlug' => $cat->localized_slug,
                                         'subSlug' => $sub->localized_slug
                                     ]) }}"

@@ -3,7 +3,7 @@
 @section('content')
  <div id="register__page">
         <div id="register__container">
-            <form action="{{ route("register") }}" method="POST">
+            <form action="{{ route("register", ['locale' => app()->getLocale()]) }}" method="POST">
                 @csrf
                 <div id="register__card">
                     <div id="register__header">

@@ -23,7 +23,7 @@ class LoginController extends Controller
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-        return redirect()->route("dashboard");
+        return redirect()->route("dashboard", ['locale' => app()->getLocale()]);
     }
 
     // Login failed
@@ -37,7 +37,7 @@ public function logout(Request $request)
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect()->route('login-page');
+    return redirect()->route('login-page', ['locale' => app()->getLocale()]);
 }
 
 }

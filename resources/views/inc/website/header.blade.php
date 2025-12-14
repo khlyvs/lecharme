@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="{{ asset('website/css/register.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/login.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/user.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/filter.css') }}">
 
 
 
@@ -41,7 +42,7 @@
             <div class="row align-items-center py-3 header-desktop">
                 <!-- Logo -->
                 <div class="col-auto">
-                    <a href="{{ route("dashboard") }}" class="logo">
+                   <a href="{{ route('dashboard', ['locale' => app()->getLocale()]) }}" class="logo">
                         <i class="bi bi-shop"></i>
                         <span>LeCharme</span>
                     </a>
@@ -181,20 +182,20 @@
                                 <i class="bi bi-globe"></i>
                             </button>
                             <div class="language-dropdown" id="languageDropdown" data-current-locale="{{ app()->getLocale() }}">
-                                <a class="a-login" href="{{ route('lang.switch','ru') }}">
+                                <a class="a-login" href="{{ locale_url('ru') }}">
                                     <button class="lang-option" data-lang="ru">
                                         <span class="lang-flag">🇷🇺</span>
                                         <span class="lang-name">Русский</span>
                                     </button>
                                 </a>
 
-                                <a class="a-login" href="{{ route('lang.switch','az') }}">
+                                <a class="a-login" href="{{ locale_url('az') }}">
                                 <button class="lang-option" data-lang="az">
                                     <span class="lang-flag">🇦🇿</span>
                                     <span class="lang-name">Azərbaycan</span>
                                 </button>
                                 </a>
-                                <a class="a-login" href="{{ route('lang.switch','en') }}">
+                                <a class="a-login" href="{{ locale_url('en') }}">
                                 <button class="lang-option" data-lang="en">
                                     <span class="lang-flag">🇬🇧</span>
                                     <span class="lang-name">English</span>
@@ -222,12 +223,12 @@
 
         {{-- Əgər istifadəçi GİRİŞ ETMƏYİBSƏ --}}
         @guest
-            <a href="{{ route('login-page') }}" class="user-option">
+            <a href="{{ route('login-page', ['locale' => app()->getLocale()]) }}" class="user-option">
                 <i class="bi bi-box-arrow-in-right"></i>
                 <span>Giriş et</span>
             </a>
 
-            <a href="{{ route('register-page') }}" class="user-option">
+            <a href="{{ route('register-page', ['locale' => app()->getLocale()]) }}" class="user-option">
                 <i class="bi bi-person-plus"></i>
                 <span>Qeydiyyat</span>
             </a>
@@ -235,12 +236,12 @@
 
         {{-- Əgər istifadəçi GİRİŞ ETMİŞDİRSƏ --}}
         @auth
-            <a href="{{ route('profile') }}" class="user-option">
+            <a href="{{ route('profile', ['locale' => app()->getLocale()]) }}" class="user-option">
                 <i class="bi bi-person-circle"></i>
                 <span>Profilim</span>
             </a>
 
-            <form action="{{ route("logout") }}" method="post">
+            <form action="{{ route("logout", ['locale' => app()->getLocale()]) }}" method="post">
 
                 @csrf
             <button class="user-option" type="submit">
@@ -306,7 +307,7 @@
 
                                     @guest
                                         {{-- login --}}
-                                        <form action="{{ route('login-page') }}">
+                                        <form action="{{ route('login-page', ['locale' => app()->getLocale()]) }}">
                                             <button type="submit" class="user-option">
                                                 <i class="bi bi-box-arrow-in-right"></i>
                                                 <span>Giriş et</span>
@@ -314,7 +315,7 @@
                                         </form>
 
                                         {{-- register --}}
-                                        <form action="{{ route('register-page') }}">
+                                        <form action="{{ route('register-page', ['locale' => app()->getLocale()]) }}">
                                             <button type="submit" class="user-option">
                                                 <i class="bi bi-person-plus"></i>
                                                 <span>Qeydiyyat</span>
@@ -323,12 +324,12 @@
                                     @endguest
 
                                     @auth
-                                        <a href="{{ route('profile') }}" class="user-option">
+                                        <a href="{{ route('profile', ['locale' => app()->getLocale()]) }}" class="user-option">
                                             <i class="bi bi-person-circle"></i>
                                             <span>Profilim</span>
                                         </a>
 
-                                        <form action="{{ route("logout") }}" method="post">
+                                        <form action="{{ route("logout", ['locale' => app()->getLocale()]) }}" method="post">
 
                                             @csrf
                                         <button class="user-option" type="submit">

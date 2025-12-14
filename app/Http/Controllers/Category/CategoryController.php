@@ -5,32 +5,38 @@ namespace App\Http\Controllers\Category;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
-   public function show($slug)
+ public function show($slug)
 {
-    $category = Category::where("slug_az", $slug)
-        ->orWhere("slug_en", $slug)
-        ->orWhere("slug_ru", $slug)
-        ->with("subcategories")
-        ->firstOrFail();
+    $locale = App::getLocale(); // az, en, ru
+    $slugColumn = 'slug_' . $locale;
 
-    return view("website.category", compact("category"));
+    $category = Category::where($slugColumn, $slug)
+        ->with('subcategories')
+        ->first();
+
+
+
+    return view('website.filter.filter', compact('category', ));
 }
 
 public function subShow($categorySlug, $subSlug)
 {
-    $subcategory = Subcategory::where(function ($q) use ($subSlug) {
-        $q->where("slug_az", $subSlug)
-          ->orWhere("slug_en", $subSlug)
-          ->orWhere("slug_ru", $subSlug);
-    })
-    ->with("category")
-    ->firstOrFail();
+    $locale = App::getLocale();
+    $slugColumn = 'slug_' . $locale;
 
-    return view("website.subcategory", compact("subcategory"));
+    $subcategory = Subcategory::where($slugColumn, $subSlug)
+        ->with('category')
+        ->first();
+
+    $subcategories = Subcategory::where('category_id', $subcategory->category_id)
+        ->get();
+
+    return view('website.filter.filter', compact('subcategory', 'subcategories'));
 }
 
 }
