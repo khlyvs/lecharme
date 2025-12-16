@@ -1,0 +1,297 @@
+#login__page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    width: 100%;
+    max-width: 550px;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    padding: 20px;
+}
+.a-login{
+    text-decoration: none;
+}
+
+#login__card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e7eb;
+    animation: login__slideUp 0.6s ease-out;
+}
+
+@keyframes login__slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#login__header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+#login__logo {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+#login__subtitle {
+    color: #6b7280;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+#loginForm {
+    margin-bottom: 24px;
+}
+
+#login__email-group,
+#login__password-group {
+    margin-bottom: 20px;
+}
+
+#login__email-group label,
+#login__password-group label {
+    display: block;
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+#login__email-group input,
+#login__password-group input {
+    width: 100%;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    color: #1a1a1a;
+    font-size: 15px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+#login__email-group input::placeholder,
+#login__password-group input::placeholder {
+    color: #6b7280;
+}
+
+#login__email-group input:focus,
+#login__password-group input:focus {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+}
+
+#login__password-wrapper {
+    position: relative;
+}
+
+#passwordToggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    border-radius: 6px;
+}
+
+#passwordToggle:hover {
+    color: #1a1a1a;
+    background: #f3f4f6;
+}
+
+#login__form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+}
+
+#login__checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    cursor: pointer;
+    user-select: none;
+}
+
+#login__checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #1a1a1a;
+}
+
+#login__forgot-password {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+#login__forgot-password:hover {
+    color: #6b7280;
+    text-decoration: underline;
+}
+
+#login__submit-btn,
+#googleLogin {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+#login__submit-btn {
+    background: #1a1a1a;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#login__submit-btn:hover {
+    background: #2d2d2d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#login__submit-btn:active {
+    transform: translateY(0);
+}
+
+#login__submit-btn svg {
+    transition: transform 0.3s ease;
+}
+
+#login__submit-btn:hover svg {
+    transform: translateX(4px);
+}
+
+#googleLogin {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+}
+
+#googleLogin:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+#googleLogin:active {
+    transform: translateY(0);
+}
+
+#login__divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 24px 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+#login__divider::before,
+#login__divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#login__divider span {
+    padding: 0 16px;
+}
+
+#login__signup-link {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+#login__signup-link a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+#login__signup-link a:hover {
+    color: #6b7280;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    #login__card {
+        padding: 36px 28px;
+    }
+
+    #login__logo {
+        font-size: 32px;
+    }
+
+    #login__form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    #login__forgot-password {
+        align-self: flex-end;
+    }
+}
+
+/* Loading state */
+#login__submit-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+#login__submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: login__spin 0.8s linear infinite;
+}
+
+@keyframes login__spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

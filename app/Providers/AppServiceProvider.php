@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
    public function boot()
 {
     View::composer('components.catalog-menu', CatalogComposer::class);
+
+    // Helper dosyalarını yükle
+    require_once app_path('helpers/locale.php');
     require_once app_path('helpers/helper.php');
 }
 }

@@ -4,25 +4,23 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 
 class SwitchLocale
 {
-    protected array $availableLocales = ['en', 'az', 'ru'];
+    protected array $availableLocales = ['az', 'en', 'ru'];
 
     public function handle(Request $request, Closure $next)
     {
-       $availableLocales = ['az', 'en', 'ru'];
         $segment = $request->segment(1);
 
-        if (in_array($segment, $availableLocales)) {
-            app()->setLocale($segment);
+        if (in_array($segment, $this->availableLocales)) {
+            App::setLocale($segment);
             session(['locale' => $segment]);
         } else {
-            // Əgər URL-də səhv locale varsa → son istifadə olunanı saxla
-            app()->setLocale(session('locale', 'az'));
+            App::setLocale(session('locale', 'az'));
         }
+
         return $next($request);
     }
 }

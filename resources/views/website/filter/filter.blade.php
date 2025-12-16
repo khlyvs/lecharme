@@ -43,23 +43,26 @@
                     </div>
                 </div>
 
-                <!-- Categories -->
+                <!-- SubCategories - Dinamik -->
+                @php
+                    $subcategoriesToShow = isset($category) ? $category->subcategories : [];
+                @endphp
 
-    <div class="filter__section">
-        <h3 class="filter__section-title">SubKateqoriyalar</h3>
-
-
-            <label class="filter__checkbox">
-                <input type="checkbox"
-                       name="subcategories[]"
-                       value="">
-
-                <span class="filter__checkbox-label">
-
-                </span>
-            </label>
-
-    </div>
+                @if(count($subcategoriesToShow) > 0)
+                    <div class="filter__section">
+                        <h3 class="filter__section-title">SubKateqoriyalar</h3>
+                        @foreach($subcategoriesToShow as $subcategory)
+                            <label class="filter__checkbox">
+                                <input type="checkbox"
+                                       name="subcategories[]"
+                                       value="{{ $subcategory->id }}">
+                                <span class="filter__checkbox-label">
+                                    {{ $subcategory->localized_name }}
+                                </span>
+                            </label>
+                        @endforeach
+                    </div>
+                @endif
 
 
 
@@ -137,7 +140,9 @@
             <main id="filter__main" class="filter__main">
                 <div id="filter__topbar" class="filter__topbar">
                     <div id="filter__results" class="filter__results">
-                        <h1 id="filter__results-title" class="filter__results-title">Ürünlerim</h1>
+                        <h1 id="filter__results-title" class="filter__results-title">
+                            {{ $category->localized_name ?? $subcategory->localized_name ?? 'Ürünlerim' }}
+                        </h1>
                         <p id="filter__results-count" class="filter__results-count" aria-live="polite">8 ürün bulundu</p>
                     </div>
                     <div id="filter__sort" class="filter__sort">

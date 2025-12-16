@@ -28,6 +28,7 @@
         },
 
     "files": [
+        "app/helpers/locale.php",
         "app/helpers/helper.php"
     ]
     },
