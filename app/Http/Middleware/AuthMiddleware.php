@@ -16,9 +16,9 @@ class AuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-       if (!Auth::check()) {
-            return redirect()->route('login-page');
+        
+       if (!Auth::guard('web')->check()) {
+            return redirect()->route('login-page', ['locale' => app()->getLocale()]);
         }
 
         return $next($request);

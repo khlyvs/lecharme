@@ -30,7 +30,7 @@
                         <span>Ayarlar</span>
                     </button>
 
-                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="display:none;">
+                    <form id="logoutForm" action="{{ locale_route('logout') }}" method="POST" style="display:none;">
                             @csrf
                     </form>
                     <button class="user__nav-item" data-tab="logout">
@@ -74,7 +74,7 @@
 
 
                         </div>
-                        <form id="user__profile-form" method="post" action="{{ route('reset-credentials') }}">
+                        <form id="user__profile-form" method="post" action="{{ locale_route('reset-credentials') }}">
     @csrf
 
     <div id="user__form-section">

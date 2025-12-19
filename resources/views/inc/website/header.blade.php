@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="{{ asset('website/css/register.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/login.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/user.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/filter.css') }}">
 
 
 
@@ -41,7 +42,7 @@
             <div class="row align-items-center py-3 header-desktop">
                 <!-- Logo -->
                 <div class="col-auto">
-                    <a href="{{ route("dashboard") }}" class="logo">
+                    <a href="{{ locale_route('dashboard') }}" class="logo">
                         <i class="bi bi-shop"></i>
                         <span>LeCharme</span>
                     </a>
@@ -61,7 +62,7 @@
                 <!-- Search -->
                 <div class="col">
                     <div class="search-wrapper">
-                        <input type="text" class="form-control search-input" placeholder="Ürün, kategori veya marka ara..." autocomplete="off">
+                        <input type="text" class="form-control search-input" placeholder="@lang('header.search_placeholder')" autocomplete="off">
                         <button class="search-btn" type="button">
                             <i class="bi bi-search"></i>
                         </button>
@@ -177,24 +178,24 @@
                     <div class="header-actions">
                         <!-- Language Selector -->
                         <div class="language-selector">
-                            <button class="action-btn language-btn" type="button" id="languageBtn" title="Dil Seç">
+                            <button class="action-btn language-btn" type="button" id="languageBtn" title="@lang('header.language')">
                                 <i class="bi bi-globe"></i>
                             </button>
                             <div class="language-dropdown" id="languageDropdown" data-current-locale="{{ app()->getLocale() }}">
-                                <a class="a-login" href="{{ route('lang.switch','ru') }}">
+                                <a class="a-login" href="{{ locale_url('ru') }}">
                                     <button class="lang-option" data-lang="ru">
                                         <span class="lang-flag">🇷🇺</span>
                                         <span class="lang-name">Русский</span>
                                     </button>
                                 </a>
 
-                                <a class="a-login" href="{{ route('lang.switch','az') }}">
+                                <a class="a-login" href="{{ locale_url('az') }}">
                                 <button class="lang-option" data-lang="az">
                                     <span class="lang-flag">🇦🇿</span>
                                     <span class="lang-name">Azərbaycan</span>
                                 </button>
                                 </a>
-                                <a class="a-login" href="{{ route('lang.switch','en') }}">
+                                <a class="a-login" href="{{ locale_url('en') }}">
                                 <button class="lang-option" data-lang="en">
                                     <span class="lang-flag">🇬🇧</span>
                                     <span class="lang-name">English</span>
@@ -203,18 +204,18 @@
                             </div>
                         </div>
 
-                        <button class="action-btn" title="Favoriler" type="button">
+                        <button class="action-btn" title="@lang('header.favorites')" type="button">
                             <i class="bi bi-heart"></i>
                         </button>
 
-                        <button class="action-btn" title="Sepet" type="button">
+                        <button class="action-btn" title="@lang('header.cart')" type="button">
                             <i class="bi bi-cart3"></i>
                             <span class="badge">3</span>
                         </button>
 
                         <!-- USER BUTTON + DROPDOWN -->
                        <div class="user-selector">
-    <button class="action-btn" title="Hesabım" type="button" id="userBtn">
+    <button class="action-btn" title="@lang('header.account')" type="button" id="userBtn">
         <i class="bi bi-person"></i>
     </button>
 
@@ -222,31 +223,30 @@
 
         {{-- Əgər istifadəçi GİRİŞ ETMƏYİBSƏ --}}
         @guest
-            <a href="{{ route('login-page') }}" class="user-option">
+            <a href="{{ locale_route('login-page') }}" class="user-option">
                 <i class="bi bi-box-arrow-in-right"></i>
-                <span>Giriş et</span>
+                <span>@lang('header.login')</span>
             </a>
 
-            <a href="{{ route('register-page') }}" class="user-option">
+            <a href="{{ locale_route('register-page') }}" class="user-option">
                 <i class="bi bi-person-plus"></i>
-                <span>Qeydiyyat</span>
+                <span>@lang('header.register')</span>
             </a>
         @endguest
 
         {{-- Əgər istifadəçi GİRİŞ ETMİŞDİRSƏ --}}
         @auth
-            <a href="{{ route('profile') }}" class="user-option">
+            <a href="{{ locale_route('profile') }}" class="user-option">
                 <i class="bi bi-person-circle"></i>
-                <span>Profilim</span>
+                <span>@lang('header.account')</span>
             </a>
 
-            <form action="{{ route("logout") }}" method="post">
-
+            <form action="{{ locale_route('logout') }}" method="post">
                 @csrf
-            <button class="user-option" type="submit">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Çıxış</span>
-            </button>
+                <button class="user-option" type="submit">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>@lang('header.logout')</span>
+                </button>
             </form>
         @endauth
 
@@ -262,7 +262,7 @@
                 <!-- Top Row: Logo + Actions -->
                 <div class="row align-items-center py-2 header-mobile-top">
                     <div class="col">
-                        <a href="#" class="logo">
+                        <a href="{{ locale_route('dashboard') }}" class="logo">
                             <i class="bi bi-shop"></i>
                             <span>LeCharme</span>
                         </a>
@@ -275,18 +275,24 @@
                                     <i class="bi bi-globe"></i>
                                 </button>
                                 <div class="language-dropdown" id="languageDropdownMobile">
+                                <a class="a-login" href="{{ locale_url('ru') }}">
                                     <button class="lang-option" data-lang="tr">
-                                        <span class="lang-flag">🇹🇷</span>
-                                        <span class="lang-name">Türkçe</span>
+                                        <span class="lang-flag">🇷🇺</span>
+                                        <span class="lang-name">Русский</span>
                                     </button>
+                                    </a>
+                                    <a class="a-login" href="{{ locale_url('az') }}">
                                     <button class="lang-option" data-lang="az">
                                         <span class="lang-flag">🇦🇿</span>
                                         <span class="lang-name">Azərbaycan</span>
                                     </button>
+                                    </a>
+                                    <a class="a-login" href="{{ locale_url('en') }}">
                                     <button class="lang-option" data-lang="en">
                                         <span class="lang-flag">🇬🇧</span>
                                         <span class="lang-name">English</span>
                                     </button>
+                                    </a>
                                 </div>
                             </div>
                             <button class="action-btn" title="Favoriler" type="button">
@@ -305,36 +311,28 @@
                                 <div class="user-dropdown" id="userDropdownMobile">
 
                                     @guest
-                                        {{-- login --}}
-                                        <form action="{{ route('login-page') }}">
-                                            <button type="submit" class="user-option">
-                                                <i class="bi bi-box-arrow-in-right"></i>
-                                                <span>Giriş et</span>
-                                            </button>
-                                        </form>
-
-                                        {{-- register --}}
-                                        <form action="{{ route('register-page') }}">
-                                            <button type="submit" class="user-option">
-                                                <i class="bi bi-person-plus"></i>
-                                                <span>Qeydiyyat</span>
-                                            </button>
-                                        </form>
+                                        <a href="{{ locale_route('login-page') }}" class="user-option">
+                                            <i class="bi bi-box-arrow-in-right"></i>
+                                            <span>@lang('header.login')</span>
+                                        </a>
+                                        <a href="{{ locale_route('register-page') }}" class="user-option">
+                                            <i class="bi bi-person-plus"></i>
+                                            <span>@lang('header.register')</span>
+                                        </a>
                                     @endguest
 
                                     @auth
-                                        <a href="{{ route('profile') }}" class="user-option">
+                                        <a href="{{ locale_route('profile') }}" class="user-option">
                                             <i class="bi bi-person-circle"></i>
-                                            <span>Profilim</span>
+                                            <span>@lang('header.profile')</span>
                                         </a>
 
-                                        <form action="{{ route("logout") }}" method="post">
-
+                                        <form action="{{ locale_route('logout') }}" method="post">
                                             @csrf
-                                        <button class="user-option" type="submit">
-                                            <i class="bi bi-box-arrow-right"></i>
-                                            <span>Çıxış</span>
-                                        </button>
+                                            <button class="user-option" type="submit">
+                                                <i class="bi bi-box-arrow-right"></i>
+                                                <span>@lang('header.logout')</span>
+                                            </button>
                                         </form>
                                     @endauth
 

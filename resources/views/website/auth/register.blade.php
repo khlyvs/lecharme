@@ -3,22 +3,22 @@
 @section('content')
  <div id="register__page">
         <div id="register__container">
-            <form action="{{ route("register") }}" method="POST">
+            <form action="{{ route("register", ['locale' => app()->getLocale()]) }}" method="POST">
                 @csrf
                 <div id="register__card">
                     <div id="register__header">
                         <h1 id="register__logo">LeCharme</h1>
-                        <p id="register__subtitle">Yeni hesap oluşturun</p>
+                        <p id="register__subtitle">@lang('register.subtitle')</p>
                     </div>
 
                     <form id="registerForm">
                         <div id="register__form-group-1">
-                            <label for="fullName">Ad Soyad</label>
+                            <label for="fullName">@lang('register.fullname_placeholder')</label>
                             <input
                                 type="text"
                                 id="fullName"
                                 name="name"
-                                placeholder="Adınız Soyadınız"
+                                placeholder="@lang('register.fullname_placeholder')"
                                 required
                                 autocomplete="name"
                             >
@@ -28,12 +28,12 @@
                         @enderror
 
                         <div id="register__form-group-2">
-                            <label for="email">E-posta</label>
+                            <label for="email">@lang('register.email')</label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                placeholder="ornek@email.com"
+                                placeholder="@lang('register.email_placeholder')"
                                 required
                                 autocomplete="email"
                             >
@@ -44,7 +44,7 @@
                         @enderror
 
                         <div id="register__form-group-3">
-                            <label for="password">Şifre</label>
+                            <label for="password">@lang('register.password')</label>
                             <div id="register__password-wrapper-1">
                                 <input
                                     type="password"
@@ -66,7 +66,7 @@
                                 <div class="text-danger small mt-1">{{ $message }}</div>
                          @enderror
                         <button type="submit" id="register__submit-btn">
-                            <span>Qeydiyyatdan Keç</span>
+                            <span>@lang('register.register')</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12h14M12 5l7 7-7 7"></path>
                             </svg>
@@ -74,7 +74,7 @@
                     </form>
 
                     <div id="register__divider">
-                        <span>veya</span>
+                        <span>@lang('register.or')</span>
                     </div>
 
                     <button id="googleRegister">
@@ -84,11 +84,11 @@
                             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                         </svg>
-                        <span>Google ile Kayıt Ol</span>
+                        <span>@lang('register.register_google')</span>
                     </button>
 
                     <div id="register__signup-link">
-                        <p>Zaten hesabınız var mı? <a href="../login/index.html">Giriş yapın</a></p>
+                        <p>@lang('register.have_account') <a href="{{ locale_route('login') }}">@lang('register.login')</a></p>
                     </div>
             </form>
                 </div>

@@ -16,10 +16,13 @@ class AuthPageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Kullanıcı giriş yapmışsa login/register sayfalarına erişemez
-        if (Auth::check()) {
-            $locale = $request->route('locale') ?? app()->getLocale();
-            return redirect()->route("dashboard", ['locale' => $locale])->with('info', 'Zaten giriş yapmışsınız!');
+        
+         if (Auth::guard('web')->check()) {
+            $locale = session('locale', app()->getLocale()) ?: 'az';
+
+            return redirect()->route('dashboard', [
+                'locale' => $locale
+            ])->with('info', 'Artıq daxil olmusunuz!');
         }
 
         return $next($request);
