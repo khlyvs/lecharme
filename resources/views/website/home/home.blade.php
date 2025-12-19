@@ -61,12 +61,12 @@
                 <div class="campaign-section">
                     <div class="campaign-header">
                         <div class="campaign-header-content">
-                            <h3 class="campaign-title">Kampanyalı Ürünler</h3>
+                            <h3 class="campaign-title"> @lang('home.campaign_title') </h3>
                             <div class="countdown-timer">
                                 <div class="countdown-display">
                                     <span class="countdown-item">
                                         <span class="countdown-value" id="days">00</span>
-                                        <span class="countdown-label-small">Gün</span>
+                                        <span class="countdown-label-small">@lang('home.day')</span>
                                     </span>
                                     <span class="countdown-separator">:</span>
                                     <span class="countdown-item">
@@ -95,7 +95,7 @@
                                                 <a href="#">Premium Elbise</a>
                                             </h4>
                                             <div class="product-brand">
-                                                <span class="brand-text">Yetkili Satıcı</span>
+                                                <span class="brand-text"></span>
                                             </div>
                                         </div>
                                         <div class="product-image-wrapper">
@@ -180,10 +180,10 @@
                     <header id="product__slider__header">
                         <span id="product__slider__badge">
                             <i class="bi bi-gem"></i>
-                            Premium Koleksiyon
+                           @lang('home.premium_collection')
                         </span>
-                        <h1 id="product__slider__title">Öne Çıkan Ürünler</h1>
-                        <p id="product__slider__subtitle">Sezon trendlerini yansıtan özenle seçilmiş premium ürünlerimizi keşfedin</p>
+                        <h1 id="product__slider__title">@lang('home.featured_products')</h1>
+                        <p id="product__slider__subtitle">@lang('home.featured_subtitle')</p>
                     </header>
 
                     <!-- Navigation -->
@@ -219,7 +219,7 @@
                                     <div class="product__slider__card__overlay">
                                         <button class="product__slider__btn-quick-view">
                                             <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
+                                            @lang('home.quick_view')
                                         </button>
                                     </div>
                                 </figure>
@@ -246,7 +246,7 @@
 
                                     <button class="product__slider__card__add-to-cart">
                                         <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
+                                        <span>@lang('home.add_to_cart')</span>
                                     </button>
                                 </div>
                             </article>
@@ -270,7 +270,7 @@
                                     <div class="product__slider__card__overlay">
                                         <button class="product__slider__btn-quick-view">
                                             <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
+                                            @lang('home.quick_view')
                                         </button>
                                     </div>
                                 </figure>
@@ -296,7 +296,7 @@
 
                                     <button class="product__slider__card__add-to-cart">
                                         <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
+                                        <span>@lang('home.add_to_cart')</span>
                                     </button>
                                 </div>
                             </article>
@@ -320,7 +320,7 @@
                                     <div class="product__slider__card__overlay">
                                         <button class="product__slider__btn-quick-view">
                                             <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
+                                            @lang('home.quick_view')
                                         </button>
                                     </div>
                                 </figure>
@@ -347,7 +347,8 @@
 
                                     <button class="product__slider__card__add-to-cart">
                                         <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
+                                        <span>  @lang('home.add_to_cart')</span>
+
                                     </button>
                                 </div>
                             </article>
@@ -371,7 +372,7 @@
                                     <div class="product__slider__card__overlay">
                                         <button class="product__slider__btn-quick-view">
                                             <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
+                                           @lang('home.quick_view')
                                         </button>
                                     </div>
                                 </figure>
@@ -397,7 +398,7 @@
 
                                     <button class="product__slider__card__add-to-cart">
                                         <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
+                                        <span>@lang('home.add_to_cart')</span>
                                     </button>
                                 </div>
                             </article>
@@ -616,7 +617,7 @@
             <!-- View All -->
             <div class="text-center mt-5">
                 <a href="#" class="product__slider__btn-view-all">
-                    <span>Tüm Ürünleri Gör</span>
+                    <span>@lang('home.view_all')</span>
                     <i class="bi bi-arrow-right"></i>
                 </a>
             </div>

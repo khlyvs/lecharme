@@ -4,22 +4,39 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\Category;
-use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use App\Services\SlugResolverService;
+use App\Models\Category;
 use Illuminate\Support\Facades\Cache;
 
 class NormalizeLocalizedSlug
 {
    public function handle(Request $request, Closure $next)
 {
+
+
+
     $route = $request->route();
     if (!$route) return $next($request);
 
     $locale = app()->getLocale();
+    
+    // Cache yoxdursa, yenidən yüklə
     $categories = Cache::get('menu.categories');
-    if (!$categories) return $next($request);
+    if (!$categories) {
+        $categories = Category::with([
+            'subcategories' => function ($q) {
+                $q->orderBy('position')
+                  ->where('is_active', 1);
+            }
+        ])
+        ->orderBy('position')
+        ->where('is_active', 1)
+        ->get();
+        
+        // Cache-ə yaz
+        Cache::forever('menu.categories', $categories);
+    }
 
     $resolver = app(SlugResolverService::class);
 
@@ -70,6 +87,9 @@ class NormalizeLocalizedSlug
 
             $request->attributes->set('resolved_category', $category);
             $request->attributes->set('resolved_subcategory', $sub);
+        } else {
+            // Subcategory tapılmadı, 404 qaytar
+            abort(404);
         }
     }
 

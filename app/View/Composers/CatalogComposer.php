@@ -12,12 +12,17 @@ class CatalogComposer
     public function compose(View $view)
     {
         $categories = Cache::rememberForever($this->cacheKey, function () {
-            return Category::with(['subcategories' => function($q) {
-                $q->orderBy('position')->where('is_active',1);
-            }])->orderBy('position')->where('is_active',1)->get();
+            return Category::with([
+                'subcategories' => function ($q) {
+                    $q->orderBy('position')
+                      ->where('is_active', 1);
+                }
+            ])
+            ->orderBy('position')
+            ->where('is_active', 1)
+            ->get();
         });
-
-        $view->with('menuCategories', $categories);
+         $view->with('menuCategories', $categories);
     }
 
 

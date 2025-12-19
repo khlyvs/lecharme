@@ -14,6 +14,7 @@
 		<link href="templates/default/css/style.bundle.css?v=sasadasdsa" rel="stylesheet" type="text/css" />
 
 		<link href="{{ asset('website/manager/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 
 		<style>
@@ -53,9 +54,7 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="">
-							<img alt="Logo" src="" class="h-15px logo" />
-						</a>
+
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
 						<div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
@@ -81,7 +80,7 @@
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
 								<div class="menu-item">
-									<a class="menu-link active" href="">
+									<a class="menu-link active" href="{{ route('dashboard.view') }}">
 										<span class="menu-icon">
 											<!--begin::Svg Icon | path: icons/duotone/Design/PenAndRuller.svg-->
 											<span class="svg-icon svg-icon-2">
@@ -96,20 +95,51 @@
 									</a>
 								</div>
 
-
-
-										<div class="menu-item">
-											<a class="menu-link" href="  ">
-												<span class="menu-bullet"><i class="fa-duotone fa-regular fa-list-check"></i></span></span>
-												<span class="menu-title">Projects</span>
-											</a>
-										</div>
+                                        @adminPermission('admin.view')
                                         <div class="menu-item">
-											<a class="menu-link" href="  ">
-												<span class="menu-bullet"><i class="fa-solid fa-comment"></i></span></span>
-												<span class="menu-title">Comments</span>
+											<a class="menu-link" href=" {{ route('admin.view') }}  ">
+												<span class="menu-bullet"><i class="fa-solid fa-user-tie"></i></span></span>
+												<span class="menu-title">Adminlər</span>
 											</a>
 										</div>
+                                        @endadminPermission
+                                        {{-- <div class="menu-item">
+											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+												<span class="menu-bullet"><i class="fa-solid fa-user-group"></i></span></span>
+												<span class="menu-title">İstifadəçilər</span>
+											</a>
+										</div> --}}
+                                        @adminPermission('category.view')
+                                            <div class="menu-item">
+                                                <a class="menu-link" href="{{ route('category.view') }}">
+                                                    <span class="menu-bullet"><i class="fa-solid fa-list"></i></span>
+                                                    <span class="menu-title">Kateqoriyalar</span>
+                                                </a>
+                                            </div>
+                                        @endadminPermission
+
+                                        @adminPermission('subcategory.view')
+                                        <div class="menu-item">
+											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+												<span class="menu-bullet"><i class="fa-solid fa-layer-group"></i></span></span>
+												<span class="menu-title">Subkateqoriyalar</span>
+											</a>
+										</div>
+                                        @endadminPermission
+                                         {{-- <div class="menu-item">
+											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+												<span class="menu-bullet"><i class="fa-solid fa-sliders"></i></span></span>
+												<span class="menu-title">Slaydlar</span>
+											</a>
+										</div>
+
+                                        <div class="menu-item">
+											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+												<span class="menu-bullet"><i class="fa-solid fa-box"></i></span></span>
+												<span class="menu-title">Məhsullar</span>
+											</a>
+										</div> --}}
+
 
 
 
@@ -153,9 +183,7 @@
 							<!--end::Aside mobile toggle-->
 							<!--begin::Mobile logo-->
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-								<a href="index.html" class="d-lg-none">
-									<img alt="Logo" src="templates/default/media/logos/logo-3.svg" class="h-30px" />
-								</a>
+
 							</div>
 							<!--end::Mobile logo-->
 							<!--begin::Wrapper-->
@@ -167,7 +195,7 @@
 										<!--begin::Menu-->
 										<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
 											<div class="menu-item me-lg-1">
-												<a class="menu-link active py-3" href="index.php?module=dashboard&page=main">
+												<a class="menu-link active py-3" href="{{ route('dashboard.view') }}">
 													<span class="menu-title">Ana Səhifə</span>
 												</a>
 											</div>

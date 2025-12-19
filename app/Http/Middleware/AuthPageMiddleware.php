@@ -16,9 +16,7 @@ class AuthPageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-         if ($request->is('admin/*')) {
-            return $next($request);
-        }
+        
          if (Auth::guard('web')->check()) {
             $locale = session('locale', app()->getLocale()) ?: 'az';
 

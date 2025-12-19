@@ -20,9 +20,7 @@ class ManagerLoginController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-
-            // ✅ backend route name
-            return redirect()->route('backend.dashboard');
+            return redirect()->route('dashboard.view');
         }
 
         return back()->withErrors([
@@ -40,4 +38,6 @@ class ManagerLoginController extends Controller
         // ✅ backend login route
         return redirect()->route('backend.login');
     }
+
+
 }

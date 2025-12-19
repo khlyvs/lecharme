@@ -5,7 +5,7 @@
 								<div class="row g-5 g-xl-8">
 									<div class="col-xl-3">
 										<!--begin::Statistics Widget 5-->
-										<a href="#" class="card bg-danger    hoverable card-xl-stretch mb-xl-8">
+										<a href="" class="card bg-danger    hoverable card-xl-stretch mb-xl-8">
 											<!--begin::Body-->
 											<div class="card-body">
 												<!--begin::Svg Icon | path: icons/duotone/Media/Equalizer.svg-->

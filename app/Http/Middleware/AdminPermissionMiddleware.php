@@ -2,25 +2,42 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Admin;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Admin;
 
 class AdminPermissionMiddleware
 {
-    public function handle(Request $request, Closure $next, string $permission)
+    public function handle(Request $request, Closure $next)
     {
-        /** @var Admin|null $admin */
         $admin = auth('admin')->user();
 
-        if (!$admin) {
-            return redirect()->route('admin.auth');
-        }
+    if (!$admin) {
+        return redirect()->route('backend.login');
+    }
 
-        // ❗ PERMISSION YOXDURSA → 403
-        if (!$admin->hasPermission($permission)) {
-            abort(403);
-        }
-        return $next($request);
+    $routeName = $request->route()?->getName();
+
+    if (!$routeName) {
+        abort(403);
+    }
+
+    // backend.dashboard.view → dashboard.view
+    // backend.dashboard      → dashboard.view
+    $base = str_replace('backend.', '', $routeName);
+
+    if (!str_contains($base, '.')) {
+        $permission = $base . '.view';
+    } else {
+        $permission = $base;
+    }
+
+    if (!$admin->hasPermission($permission)) {
+        abort(403);
+    }
+
+
+          return $next($request);
+
     }
 }

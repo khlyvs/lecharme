@@ -29,7 +29,7 @@
 					<!--begin::Wrapper-->
 					<div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-100" method="post" action="">
+						<form class="form w-100" method="post" action="{{ route('backend.login.submit') }}">
 							<!--begin::Heading-->
                             @csrf
 							<div class="text-center mb-10">

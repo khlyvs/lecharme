@@ -16,17 +16,5 @@ class HomeController extends Controller
         }
 
 
-        public function test() {
-          return $azer= Category::create([
-                'name_az' =>'Kosmetika',
-                'name_en'=>'Cosmetics',
-                'name_ru' =>'Косметика',
-                'is_active' =>1,
-                'position'=>3,
-                'slug_az'=>'Kosmetika',
-                'slug_en'=>'Cosmetics',
-                'slug_ru'=>'Косметика',
-            ]);
-
-        }
+     
 }

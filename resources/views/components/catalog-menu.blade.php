@@ -2,7 +2,7 @@
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="catalogMenuLabel">
             <i class="bi bi-grid-3x3-gap"></i>
-            <span class="catalog-title-text">Kataloq</span>
+            <span class="catalog-title-text">@lang('header.catalog')</span>
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
