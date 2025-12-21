@@ -126,20 +126,25 @@
 											</a>
 										</div>
                                         @endadminPermission
-                                         {{-- <div class="menu-item">
-											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+
+                                        @adminPermission('slider.view')
+                                          <div class="menu-item">
+											<a class="menu-link" href=" {{  route('slider.view')  }} ">
 												<span class="menu-bullet"><i class="fa-solid fa-sliders"></i></span></span>
 												<span class="menu-title">Slaydlar</span>
 											</a>
 										</div>
+                                        @endadminPermission
 
+
+                                        @adminPermission('product.view')
                                         <div class="menu-item">
-											<a class="menu-link" href=" {{  route('subcategory.view')  }} ">
+											<a class="menu-link" href=" {{  route('product.view')  }} ">
 												<span class="menu-bullet"><i class="fa-solid fa-box"></i></span></span>
 												<span class="menu-title">Məhsullar</span>
 											</a>
-										</div> --}}
-
+										</div>
+                                         @endadminPermission
 
 
 

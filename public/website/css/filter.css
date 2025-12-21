@@ -55,7 +55,7 @@
 .filter__mobile-toggle {
     display: none;
     position: fixed;
-    top: 16px;
+    top: 50%;
     left: 16px;
     z-index: 1000;
     padding: 12px 16px;
@@ -159,7 +159,7 @@
     transition: all var(--transition-fast);
     position: fixed;
     top: 16px;
-    left: 16px;
+    right: 25px;
     z-index: 1001;
     box-shadow: var(--shadow-md);
 }
@@ -794,6 +794,7 @@
 
     .filter__sidebar.active {
         transform: translateX(0);
+        z-index: 999999;
     }
 
     .filter__btn-close {
@@ -854,8 +855,8 @@
     }
 
     .filter__mobile-toggle {
-        top: 12px;
-        left: 12px;
+        top: 50%;
+        left: 1px;
         padding: 10px 14px;
     }
 
@@ -870,7 +871,7 @@
 
     .filter__btn-close {
         top: 12px;
-        left: 12px;
+        right: 15px;
         width: 32px;
         height: 32px;
     }
