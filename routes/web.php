@@ -9,11 +9,14 @@ use App\Http\Controllers\website\Auth\RegisterController;
 use App\Http\Controllers\website\Auth\GoogleAuthController;
 use App\Http\Controllers\website\Profile\ProfileController;
 use App\Http\Controllers\Backend\Auth\ManagerLoginController;
+use App\Http\Controllers\Backend\Slider\BackSliderController;
 use App\Http\Controllers\website\Category\CategoryController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
+use App\Http\Controllers\Backend\Product\BackProductController;
+use App\Http\Controllers\Backend\Product\ProductAjaxController;
 use App\Http\Controllers\Backend\Category\BackCategoryController;
-use App\Http\Controllers\Backend\Subcategory\BackSubcategoryController;
 use App\Http\Controllers\website\Profile\ResetCredentialsController;
+use App\Http\Controllers\Backend\Subcategory\BackSubcategoryController;
 
 
 
@@ -99,6 +102,21 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
         Route::post('/manager/subcategory', [BackSubcategoryController::class, 'store'])->name('subcategory.store');
         Route::put('/manager/subcategory/update/{id}', [BackSubcategoryController::class, 'update'])->name('subcategory.update');
         Route::delete('/manager/subcategory/delete/{id}', [BackSubcategoryController::class, 'destroy'])->name('subcategory.delete');
+
+
+        Route::get('/manager/slider' ,[BackSliderController::class , 'index'])->name('slider.view');
+        Route::post('/manager/slider' ,[BackSliderController::class , 'store'])->name('slider.store');
+        Route::put('/manager/slider/update/{id}', [BackSliderController::class, 'update'])->name('slider.update');
+        Route::delete('/manager/slider/delete/{id}', [BackSliderController::class, 'destroy'])->name('slider.delete');
+
+        Route::get('/manager/product' , [BackProductController::class   , 'index'])->name('product.view');
+        Route::post('/manager/product' , [BackProductController::class   , 'store'])->name('product.store');
+        Route::put('/manager/product/update/{id}' , [BackProductController::class   , 'update'])->name('product.update');
+
+        Route::get('/manager/product/{category}', [ProductAjaxController::class, 'subcategories'])->name('admin.subcategories.byCategory');
+
+
+
 
 
     });

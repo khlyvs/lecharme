@@ -9,7 +9,7 @@
         <!-- Mobile Filter Toggle Button -->
         <button id="filter__mobile-toggle" class="filter__mobile-toggle" aria-label="Filtreleri aç" aria-expanded="false" aria-controls="filter__sidebar">
             <i class="bi bi-funnel" aria-hidden="true"></i>
-            <span>Filtreler</span>
+            <span> @lang('filters.filter')</span>
         </button>
 
         <!-- Mobile Overlay -->
@@ -19,7 +19,7 @@
             <!-- Sidebar Filters -->
             <aside id="filter__sidebar" class="filter__sidebar" role="region" aria-label="Filtreler">
                 <div id="filter__header" class="filter__header">
-                    <h2 id="filter__title" class="filter__title">Filtreler</h2>
+                    <h2 id="filter__title" class="filter__title">@lang('filters.filter')</h2>
                     <div class="filter__header-actions">
                         <button id="filter__clear" class="filter__btn-clear" type="button">
                             <i class="bi bi-x-circle" aria-hidden="true"></i>
@@ -146,13 +146,13 @@
                         <p id="filter__results-count" class="filter__results-count" aria-live="polite">8 ürün bulundu</p>
                     </div>
                     <div id="filter__sort" class="filter__sort">
-                        <label for="filter__sort-select" class="filter__sort-label">Sırala:</label>
+                        <label for="filter__sort-select" class="filter__sort-label">@lang('filters.sort_by')</label>
                         <select id="filter__sort-select" class="filter__sort-select">
-                            <option value="default">Varsayılan</option>
-                            <option value="price-low">Fiyat: Düşükten Yükseğe</option>
-                            <option value="price-high">Fiyat: Yüksekten Düşüğe</option>
-                            <option value="rating">En Yüksek Puan</option>
-                            <option value="newest">En Yeni</option>
+                            <option value="default">@lang('filters.default')</option>
+                            <option value="price-low">@lang('filters.price_low_high')</option>
+                            <option value="price-high">@lang('filters.price_high_low')</option>
+                            <option value="rating">@lang('filters.newest')</option>
+
                         </select>
                     </div>
                 </div>
