@@ -74,7 +74,80 @@
                                     </svg>
                                 </span>
                                 <!--end::Svg Icon-->
-                                <input type="text" type="text" autocomplete="off" id="live_search" class="form-control form-control-solid w-250px ps-15" placeholder="Axtar" />
+                               <form method="GET" id="filterForm" class="d-flex flex-wrap align-items-start">
+
+    {{-- 🔍 SEARCH (eyni yerdə qalır) --}}
+    <div class="mb-3">
+        <input
+            type="text"
+            name="q"
+            value="{{ request('q') }}"
+            autocomplete="off"
+            id="liveSearchInput"
+            class="form-control form-control-solid w-250px ps-15"
+            placeholder="Məhsul adına görə axtar..."
+        />
+    </div>
+
+    {{-- FILTERLƏR (eyni düzən, eyni class-lar) --}}
+    <div class="ms-3 mt-3 mt-md-0">
+        <div class="row g-2 g-md-3 align-items-end">
+
+            {{-- Kateqoriya --}}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <select class="form-select form-select-solid fw-bolder" name="category_id">
+                    <option value="">Kateqoriya seç</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name_az }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Min qiymət --}}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <input type="number"
+                       name="min_price"
+                       class="form-control form-control-solid"
+                       placeholder="Min qiymət"
+                       value="{{ request('min_price') }}">
+            </div>
+
+            {{-- Max qiymət --}}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <input type="number"
+                       name="max_price"
+                       class="form-control form-control-solid"
+                       placeholder="Max qiymət"
+                       value="{{ request('max_price') }}">
+            </div>
+
+            {{-- Status --}}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <select class="form-select form-select-solid fw-bolder" name="status">
+                    <option value="">Status</option>
+                    <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>
+                        Aktiv
+                    </option>
+                    <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>
+                        Passiv
+                    </option>
+                </select>
+            </div>
+
+            {{-- Filtr butonu --}}
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <button class="btn btn-info w-100 w-md-auto">
+                    Filtr et
+                </button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
                             </div>
                             <!--end::Search-->
                         </div>
@@ -95,6 +168,16 @@
                         <!--end::Card toolbar-->
 
                         <!--begin::Modal-->
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                         <div class="modal fade" id="my_new_modal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered mw-900px">
                                 <div class="modal-content">
@@ -133,8 +216,8 @@
 
                                             {{-- ================= SUBCATEGORY ================= --}}
                                             <div class="mb-3">
-                                                <label class="form-label">Alt Kateqoriya</label>
-                                                <select name="subcategory_id" id="subcategory_select" class="form-select">
+                                                <label class="form-label">Alt Kateqoriya</label >
+                                                <select name="subcategory_id" id="subcategory_select" class="form-select" required>
                                                     <option value="">Seçin</option>
                                                 </select>
                                             </div>
@@ -288,6 +371,9 @@
                                     </thead>
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
+                                    <tbody id="productTableBody">
+                                        @include('manager.product.ajax_product', ['products' => $products])
+                                    </tbody>
                                     <tbody id="not_search" class="fw-bold text-gray-600">
                                          @foreach ($products as $product)
                                             <tr>
@@ -354,7 +440,7 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bağla"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{ route('product.update',$product->id) }}" method="POST" id="edit_product_form" enctype="multipart/form-data">
+                                                            <form action="{{ route('product.update',$product->id) }}" method="POST" id="edit_product_form_{{ $product->id }}" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('PUT')
 
@@ -511,69 +597,66 @@
                                                                         <span class="form-check-label">Aktiv</span>
                                                                     </label>
                                                                 </div>
+
+                                                                {{-- ================= EXISTING IMAGES ================= --}}
+                                                                @if($product->images->count() > 0)
+                                                                    <div class="mb-4">
+                                                                        <label class="form-label fw-bold">Mövcud Şəkillər</label>
+
+                                                                        <div class="row g-3">
+                                                                            @foreach($product->images as $image)
+                                                                                <div class="col-6 col-md-3">
+                                                                                    <div class="card h-100 shadow-sm">
+                                                                                        {{-- IMAGE --}}
+                                                                                        <div class="position-relative">
+                                                                                            <img src="{{ asset('storage/products/'.$image->image) }}"
+                                                                                                 class="card-img-top"
+                                                                                                 style="height:150px; object-fit:cover">
+
+                                                                                            {{-- MAIN BADGE --}}
+                                                                                            @if($image->is_main)
+                                                                                                <span class="badge bg-success position-absolute top-0 start-0 m-2">
+                                                                                                    Əsas
+                                                                                                </span>
+                                                                                            @endif
+                                                                                        </div>
+
+                                                                                        {{-- ACTIONS --}}
+                                                                                        <div class="card-body p-2 text-center">
+                                                                                            {{-- SET MAIN --}}
+                                                                                            <div class="form-check form-check-inline">
+                                                                                                <input class="form-check-input"
+                                                                                                       type="radio"
+                                                                                                       name="main_image_id"
+                                                                                                       value="{{ $image->id }}"
+                                                                                                       {{ $image->is_main ? 'checked' : '' }}>
+                                                                                                <label class="form-check-label small">
+                                                                                                    Əsas seç
+                                                                                                </label>
+                                                                                            </div>
+
+                                                                                            {{-- DELETE --}}
+                                                                                            <div class="form-check form-check-inline text-danger">
+                                                                                                <input class="form-check-input"
+                                                                                                       type="checkbox"
+                                                                                                       name="delete_images[]"
+                                                                                                       value="{{ $image->id }}">
+                                                                                                <label class="form-check-label small">
+                                                                                                    Sil
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </form>
                                                         </div>
-                                                       @if($product->images->count())
-    <div class="mb-4">
-        <label class="form-label fw-bold">Mövcud Şəkillər</label>
-
-        <div class="row g-3">
-            @foreach($product->images as $image)
-                <div class="col-6 col-md-3">
-
-                    <div class="card h-100 shadow-sm">
-
-                        {{-- IMAGE --}}
-                        <div class="position-relative">
-                            <img src="{{ asset('storage/'.$image->image) }}"
-                                 class="card-img-top"
-                                 style="height:150px; object-fit:cover">
-
-                            {{-- MAIN BADGE --}}
-                            @if($image->is_main)
-                                <span class="badge bg-success position-absolute top-0 start-0 m-2">
-                                    Əsas
-                                </span>
-                            @endif
-                        </div>
-
-                        {{-- ACTIONS --}}
-                        <div class="card-body p-2 text-center">
-
-                            {{-- SET MAIN --}}
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="main_image_id"
-                                       value="{{ $image->id }}"
-                                       {{ $image->is_main ? 'checked' : '' }}>
-                                <label class="form-check-label small">
-                                    Əsas seç
-                                </label>
-                            </div>
-
-                            {{-- DELETE --}}
-                            <div class="form-check form-check-inline text-danger">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       name="delete_images[]"
-                                       value="{{ $image->id }}">
-                                <label class="form-check-label small">
-                                    Sil
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            @endforeach
-        </div>
-    </div>
-@endif
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ləğv et</button>
-                                                            <button type="submit" name="edit_product_button" form="edit_product_form" class="btn btn-primary">Yadda saxla</button>
+                                                            <button type="submit" name="edit_product_button" form="edit_product_form_{{ $product->id }}" class="btn btn-primary">Yadda saxla</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -582,7 +665,13 @@
                                         @endforeach
                                     </tbody>
                                     <!--end::Table body-->
+
                                 </table>
+                             <div class="mt-3 text-center">
+    <small>
+        {{ $products->links('pagination::bootstrap-5') }}
+    </small>
+</div>
                             </div>
                         </div>
                         <!--end::Table-->
@@ -742,4 +831,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+
+{{-- <script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const input = document.getElementById('liveSearchInput');
+    const form  = document.getElementById('searchForm');
+
+    let timer = null;
+
+    input.addEventListener('keyup', function () {
+        clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            form.submit(); // ⬅️ ENTER YOX, ÖZÜ GÖNDƏRİR
+        }, 400);
+    });
+
+});
+</script> --}}
 @endsection

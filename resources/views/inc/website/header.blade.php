@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LeCharme</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Bootstrap 5 CSS -->
     <link href="{{ asset("website/css/bootstrap.min.css") }}" rel="stylesheet">
@@ -28,6 +28,9 @@
 <link rel="stylesheet" href="{{ asset('website/css/login.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/user.css') }}">
 <link rel="stylesheet" href="{{ asset('website/css/filter.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/productdetail.css') }}">
+<link rel="stylesheet" href="{{ asset('website/css/favorite.css') }}">
+
 
 
 
@@ -205,7 +208,9 @@
                         </div>
 
                         <button class="action-btn" title="@lang('header.favorites')" type="button">
+                            <a href="{{ locale_route('favorite.view') }}">
                             <i class="bi bi-heart"></i>
+                            </a>
                         </button>
 
                         <button class="action-btn" title="@lang('header.cart')" type="button">
@@ -296,7 +301,9 @@
                                 </div>
                             </div>
                             <button class="action-btn" title="Favoriler" type="button">
+                                <a href="{{ locale_route('favorite.view') }}">
                                 <i class="bi bi-heart"></i>
+                                </a>
                             </button>
                             <button class="action-btn" title="Sepet" type="button">
                                 <i class="bi bi-cart3"></i>

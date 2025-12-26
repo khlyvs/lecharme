@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class CreateProductRequest extends FormRequest
 {
@@ -67,6 +68,21 @@ class CreateProductRequest extends FormRequest
     {
         $this->merge([
             'is_active' => $this->has('is_active'),
+
+            // AZ
+            'slug_az' => Str::slug(
+                $this->slug_az ?: $this->name_az
+            ),
+
+            // RU
+            'slug_ru' => $this->name_ru
+                ? Str::slug($this->slug_ru ?: $this->name_ru)
+                : null,
+
+            // EN
+            'slug_en' => $this->name_en
+                ? Str::slug($this->slug_en ?: $this->name_en)
+                : null,
         ]);
     }
 
@@ -80,14 +96,12 @@ class CreateProductRequest extends FormRequest
 
             'name_az.required' => 'Məhsul adı (AZ) mütləqdir',
 
-            'slug_az.required' => 'Slug (AZ) mütləqdir',
-            'slug_az.unique'   => 'Bu AZ slug artıq mövcuddur',
+            'slug_az.unique' => 'Bu AZ slug artıq mövcuddur',
+            'slug_ru.unique' => 'Bu RU slug artıq mövcuddur',
+            'slug_en.unique' => 'Bu EN slug artıq mövcuddur',
 
-            'slug_ru.unique'   => 'Bu RU slug artıq mövcuddur',
-            'slug_en.unique'   => 'Bu EN slug artıq mövcuddur',
-
-            'price.required'   => 'Qiymət mütləqdir',
-            'price.numeric'    => 'Qiymət rəqəm olmalıdır',
+            'price.required' => 'Qiymət mütləqdir',
+            'price.numeric'  => 'Qiymət rəqəm olmalıdır',
 
             'discount_price.lt' => 'Endirimli qiymət əsas qiymətdən kiçik olmalıdır',
 

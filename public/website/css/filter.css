@@ -521,39 +521,9 @@
     color: var(--color-accent);
 }
 
-/* Wishlist */
-.product__slider__card__wishlist {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
-    background: var(--color-bg);
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    z-index: 5;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-fast);
-}
 
-.product__slider__card__wishlist i {
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-    transition: color var(--transition-fast);
-}
 
-.product__slider__card__wishlist:hover i {
-    color: var(--color-danger);
-}
 
-.product__slider__card__wishlist.active {
-    background: var(--color-danger);
-}
-
-.product__slider__card__wishlist.active i {
-    color: var(--color-bg);
-}
 
 /* Image */
 .product__slider__card__image {
@@ -980,8 +950,6 @@
 .filter__btn-clear:focus-visible,
 .filter__mobile-toggle:focus-visible,
 .filter__btn-close:focus-visible,
-.product__slider__card__wishlist:focus-visible,
-.product__slider__btn-quick-view:focus-visible,
 .product__slider__card__add-to-cart:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
@@ -993,4 +961,160 @@
         --color-border: #000;
         --color-text-muted: #333;
     }
+}
+
+/* ============================================
+   REAL-TIME FILTER STYLES
+   ============================================ */
+
+/* Mobile-only utility */
+.filter__mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .filter__mobile-only {
+        display: flex;
+    }
+}
+
+/* Active badge state */
+.filter__badge.active {
+    background: var(--color-accent) !important;
+    color: white !important;
+    border-color: var(--color-accent) !important;
+}
+
+/* Loading state */
+.filter__loading {
+    position: relative;
+    min-height: 200px;
+}
+
+.filter__skeleton-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(2px);
+    border-radius: var(--radius-md);
+}
+
+.filter__spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: filter-spin 0.7s linear infinite;
+}
+
+@keyframes filter-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.filter__error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-muted);
+}
+
+.filter__error i {
+    font-size: 3.5rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.filter__error p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter__retry-btn {
+    padding: 0.75rem 2rem;
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.filter__retry-btn:hover {
+    background: var(--color-accent-dark);
+    transform: translateY(-2px);
+}
+
+/* Disabled state during loading */
+.filter--loading .filter__btn-apply,
+.filter--loading .filter__btn-clear,
+.filter--loading .filter__sidebar input,
+.filter--loading .filter__sidebar select,
+.filter--loading .filter__sidebar button:not(.filter__btn-close) {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Pagination container */
+.filter__pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.filter__pagination nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter__pagination a,
+.filter__pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    transition: all var(--transition-fast);
+}
+
+.filter__pagination a {
+    background: var(--color-bg-soft);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.filter__pagination a:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+.filter__pagination span[aria-current="page"] {
+    background: var(--color-accent);
+    color: white;
+    font-weight: 600;
+}
+
+/* No products state */
+.filter__no-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-muted);
+}
+
+.filter__no-products p {
+    font-size: 1.1rem;
 }

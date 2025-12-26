@@ -11,22 +11,35 @@ use App\Http\Controllers\website\Profile\ProfileController;
 use App\Http\Controllers\Backend\Auth\ManagerLoginController;
 use App\Http\Controllers\Backend\Slider\BackSliderController;
 use App\Http\Controllers\website\Category\CategoryController;
+use App\Http\Controllers\Website\Favorite\FavoriteController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\Product\BackProductController;
 use App\Http\Controllers\Backend\Product\ProductAjaxController;
 use App\Http\Controllers\Backend\Category\BackCategoryController;
 use App\Http\Controllers\website\Profile\ResetCredentialsController;
 use App\Http\Controllers\Backend\Subcategory\BackSubcategoryController;
+use App\Http\Controllers\Website\ProductDetail\ProductDetailController;
+use App\Http\Controllers\Website\Basket\BasketController;
 
 
 
 Route::get('/', [HomeController::class, 'home']);
 
-
 // Google OAuth routes (locale prefix olmadan)
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('google.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('google.callback');
 // *****************************************************************************************
+
+
+// Rate limit: max 30 requests per minute per IP
+Route::post('/basket/add/{product}', [BasketController::class, 'add'])
+    ->middleware('throttle:30,1')
+    ->name('basket.add');
+
+// Rate limit for favorites
+Route::post('/favorite/{product}', [FavoriteController::class, 'addfavorite'])
+    ->middleware('throttle:30,1')
+    ->name('favorite.toggle');
 
 
 
@@ -54,9 +67,18 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
             Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         });
 
+
+        Route::get('/favorite', [FavoriteController::class, 'index'])->name('favorite.view');
+
+
+
+
+
+
         // Category routes (en sonda - wildcard)
         Route::middleware('normalize.slug')->group(function () {
 
+         Route::get('/product/{slug}', [ProductDetailController::class, 'index'])->where('slug', '[\pL\pN\-]+')->name('product.detail');
         Route::get('/{categorySlug}/{subSlug}', [CategoryController::class, 'subShow'])
             ->where([
                 'categorySlug' => '[\pL\pN\-]+',
@@ -67,7 +89,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
         Route::get('/{slug}', [CategoryController::class, 'show'])
             ->where('slug', '[\pL\pN\-]+')
             ->name('category.show');
-    });
+        });
 
 
     });
@@ -87,40 +109,43 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->
         Route::get('/manager/dashboard' , [DashboardController::class , 'index'])->name('dashboard.view');
         Route::post('/auth/logout', [ManagerLoginController::class, 'logout'])->name('backend.logout');
 
-        Route::get('/manager/admin', [AdminController::class, 'index'])->name('admin.view');
-        Route::post('/manager/admin', [AdminController::class, 'store'])->name('admin.store');
-        Route::put('/manager/admin/update/{id}', [AdminController::class, 'update'])->name('admin.update');
-        Route::delete('/manager/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+        Route::prefix('manager')->group(function () {
 
 
-        Route::get('/manager/category'   ,[BackCategoryController::class ,'index'])->name('category.view');
-        Route::post('/manager/category'  ,[BackCategoryController::class ,'store'])->name('category.store');
-        Route::put('/manager/category/update/{id}'  , [BackCategoryController::class , 'update'])->name('category.update');
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.view');
+        Route::post('/admin', [AdminController::class, 'store'])->name('admin.store');
+        Route::put('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+        Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
 
 
-        Route::get('/manager/subcategory'   ,[BackSubcategoryController::class ,'index'])->name('subcategory.view');
-        Route::post('/manager/subcategory', [BackSubcategoryController::class, 'store'])->name('subcategory.store');
-        Route::put('/manager/subcategory/update/{id}', [BackSubcategoryController::class, 'update'])->name('subcategory.update');
-        Route::delete('/manager/subcategory/delete/{id}', [BackSubcategoryController::class, 'destroy'])->name('subcategory.delete');
+        Route::get('/category'   ,[BackCategoryController::class ,'index'])->name('category.view');
+        Route::post('/category'  ,[BackCategoryController::class ,'store'])->name('category.store');
+        Route::put('/category/update/{id}'  , [BackCategoryController::class , 'update'])->name('category.update');
 
 
-        Route::get('/manager/slider' ,[BackSliderController::class , 'index'])->name('slider.view');
-        Route::post('/manager/slider' ,[BackSliderController::class , 'store'])->name('slider.store');
-        Route::put('/manager/slider/update/{id}', [BackSliderController::class, 'update'])->name('slider.update');
-        Route::delete('/manager/slider/delete/{id}', [BackSliderController::class, 'destroy'])->name('slider.delete');
+        Route::get('/subcategory'   ,[BackSubcategoryController::class ,'index'])->name('subcategory.view');
+        Route::post('/subcategory', [BackSubcategoryController::class, 'store'])->name('subcategory.store');
+        Route::put('/subcategory/update/{id}', [BackSubcategoryController::class, 'update'])->name('subcategory.update');
+        Route::delete('/subcategory/delete/{id}', [BackSubcategoryController::class, 'destroy'])->name('subcategory.delete');
 
-        Route::get('/manager/product' , [BackProductController::class   , 'index'])->name('product.view');
-        Route::post('/manager/product' , [BackProductController::class   , 'store'])->name('product.store');
-        Route::put('/manager/product/update/{id}' , [BackProductController::class   , 'update'])->name('product.update');
+        Route::get('/slider' ,[BackSliderController::class , 'index'])->name('slider.view');
+        Route::post('/slider' ,[BackSliderController::class , 'store'])->name('slider.store');
+        Route::put('/slider/update/{id}', [BackSliderController::class, 'update'])->name('slider.update');
+        Route::delete('/slider/delete/{id}', [BackSliderController::class, 'destroy'])->name('slider.delete');
 
-        Route::get('/manager/product/{category}', [ProductAjaxController::class, 'subcategories'])->name('admin.subcategories.byCategory');
+        Route::get('/product' , [BackProductController::class   , 'index'])->name('product.view');
+        Route::post('/product' , [BackProductController::class   , 'store'])->name('product.store');
+        Route::put('/product/update/{product}' , [BackProductController::class   , 'update'])->name('product.update');
+        Route::get('/product/{category}', [ProductAjaxController::class, 'subcategories'])->name('admin.subcategories.byCategory');
+
+        });
+
 
 
 
 
 
     });
-
 
 
 

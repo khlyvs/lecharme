@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Product;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class SlugResolverService
 {
@@ -35,4 +37,16 @@ class SlugResolverService
 
         return null;
     }
+
+    public function resolveProduct(string $slug): ?Product
+{   
+    return Cache::rememberForever(
+        "product.slug.$slug", function () use ($slug) {
+            return Product::where('slug_az', $slug)
+                ->orWhere('slug_en', $slug)
+                ->orWhere('slug_ru', $slug)
+                ->first();
+        }
+    );
+}
 }

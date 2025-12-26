@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Product;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -22,4 +23,7 @@ class ProductAjaxController extends Controller
             $category?->subcategories ?? []
         );
     }
+
+
+
 }
