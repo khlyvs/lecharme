@@ -59,6 +59,7 @@
 
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="{{ asset("website/js/header.js") }}"></script>
 <script src="{{ asset("website/js/header-slider.js") }}"></script>
 <script src="{{ asset("website/js/bootstrap.bundle.min.js") }}" defer></script>
@@ -68,6 +69,9 @@
 <script src="{{ asset("website/js/user.js") }}"defer></script>
 <script src="{{ asset("website/js/sweetalert.js") }}"defer></script>
 <script src="{{ asset("website/js/filter.js") }}"defer></script>
+<script src="{{ asset("website/js/ajax.js") }}"defer></script>
+<script src="{{ asset("website/js/product_detail.js") }}"defer></script>
+<script src="{{ asset("website/js/favorite.js") }}"defer></script>
 
 
 </body>

@@ -4,7 +4,7 @@ return [
     'campaign_title' => 'Акционные товары',
     'day'            => 'День',
     'authorized'     => 'Авторизованный продавец',
-
+    'main_page'      => 'Главная страница',
     'premium_collection' => 'Премиум коллекция',
     'featured_products'  => 'Рекомендуемые товары',
     'featured_subtitle'  => 'Отобранные товары в соответствии с трендами сезона',

@@ -2,7 +2,7 @@
    LeCharme - Product Slider
    ============================================ */
 
-:root {
+   :root {
     --color-primary: #0f0f23;
     --color-accent: #c9a227;
     --color-accent-dark: #a68820;
@@ -30,7 +30,7 @@
 
 body {
     font-family: var(--font-body);
-    background: var(--color-bg);
+    background: #ffffff;
     color: var(--color-primary);
 }
 
@@ -39,7 +39,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 
 /* Container */
 .container {
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -101,12 +101,26 @@ button { font-family: inherit; cursor: pointer; border: none; }
     padding: 10px 0 20px;
 }
 
+#product__slider__swiper {
+    will-change: transform;
+}
+
 #product__slider__swiper .swiper-wrapper {
     align-items: stretch;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    will-change: transform;
 }
 
 .swiper-slide {
     height: auto;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.swiper-slide-active {
+    opacity: 1;
 }
 
 /* Product Card */
@@ -153,27 +167,35 @@ button { font-family: inherit; cursor: pointer; border: none; }
 /* Wishlist */
 .product__slider__card__wishlist {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
-    background: #fff;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
     border-radius: 50%;
     display: grid;
     place-items: center;
     z-index: 5;
-    box-shadow: var(--shadow-sm);
-    transition: 0.2s;
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
 .product__slider__card__wishlist i {
-    font-size: 0.9rem;
-    color: var(--color-gray-400);
+    font-size: 1.1rem;
+    color: #ffffff;
+    transition: color 0.2s ease;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.product__slider__card__wishlist:hover i { color: var(--color-rose); }
-.product__slider__card__wishlist.active { background: var(--color-rose); }
-.product__slider__card__wishlist.active i { color: #fff; }
+.product__slider__card__wishlist:hover i {
+    color: #ffffff;
+}
+
+.product__slider__card__wishlist.active i {
+    color: #e74c3c;
+    text-shadow: none;
+}
 
 /* Image */
 .product__slider__card__image {
@@ -310,6 +332,17 @@ button { font-family: inherit; cursor: pointer; border: none; }
 
 .product__slider__card__add-to-cart.loading { background: var(--color-gray-200); }
 .product__slider__card__add-to-cart.added { background: #2ecc71; }
+.product__slider__card__add-to-cart.error {
+    background: #e74c3c;
+    font-size: 0.7rem;
+    padding: 0.6rem 0.5rem;
+}
+.product__slider__card__add-to-cart.error span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
 
 .spinner {
     width: 16px;

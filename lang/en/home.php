@@ -4,7 +4,7 @@ return [
     'campaign_title' => 'Campaign Products',
     'day'            => 'Day',
     'authorized'     => 'Authorized Seller',
-
+    'main_page'      => 'Main Page',
     'premium_collection' => 'Premium Collection',
     'featured_products'  => 'Featured Products',
     'featured_subtitle'  => 'Carefully selected premium products reflecting seasonal trends',

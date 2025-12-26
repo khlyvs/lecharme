@@ -1,11 +1,213 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LeCharme E-Commerce Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
 </p>
+
+<p align="center">
+  <strong>Modern e-commerce platform built with Laravel</strong>
+</p>
+
+---
+
+## 📋 Məzmun
+
+- [Layihə Haqqında](#layihə-haqqında)
+- [Texnologiyalar](#texnologiyalar)
+- [Arxitektura](#arxitektura)
+- [Filter API](#filter-api)
+- [Quraşdırma](#quraşdırma)
+- [İstifadə](#istifadə)
+
+---
+
+## 🎯 Layihə Haqqında
+
+**LeCharme** - Multi-language e-commerce platform. Məhsul kataloqu, filter sistemi, səbət və favoritlər funksionallığı ilə tam funksional e-ticarət saytı.
+
+### Xüsusiyyətlər
+
+- ✅ **Multi-language** (Azərbaycan, English, Русский)
+- ✅ **Real-time Filtering** - Debounced və instant filterlər
+- ✅ **Optimized Queries** - Cache, eager loading, indexes
+- ✅ **AJAX Support** - Səhifə yenilənmədən filterleme
+- ✅ **Responsive Design** - Mobile-friendly
+- ✅ **Clean Architecture** - Repository Pattern, Service Layer
+
+---
+
+## 🛠 Texnologiyalar
+
+- **Backend:** Laravel 11.x
+- **Frontend:** Vanilla JavaScript, CSS3
+- **Database:** MySQL
+- **Cache:** Redis/File Cache
+- **Validation:** FormRequest classes
+
+---
+
+## 🏗 Arxitektura
+
+```
+Controller → Service → Repository → Model
+     ↓         ↓          ↓          ↓
+   Request  Business   Database   Eloquent
+            Logic      Queries    ORM
+```
+
+### Struktur
+
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   └── website/
+│   │       └── Category/
+│   │           └── CategoryController.php
+│   └── Requests/
+│       └── FilterRequest.php
+├── Services/
+│   └── Website/
+│       └── Filter/
+│           └── FilterProductService.php
+├── Repositories/
+│   └── Website/
+│       └── Filter/
+│           └── FilterProductRepository.php
+└── Interfaces/
+    └── Website/
+        └── Filter/
+            └── FilterProductRepositoryInterface.php
+```
+
+---
+
+## 🔍 Filter API
+
+Tam API dokumentasiyası: **[docs/FILTER_API.md](docs/FILTER_API.md)**
+
+### Quick Start
+
+**Endpoint:**
+```
+GET /{locale}/category/{categorySlug}
+GET /{locale}/category/{categorySlug}/{subcategorySlug}
+```
+
+**Filter Parametrləri:**
+- `min_price` - Minimum qiymət
+- `max_price` - Maksimum qiymət
+- `subcategories[]` - Alt kateqoriya ID-ləri
+- `has_discount` - Endirimli məhsullar
+- `sort` - Sıralama (default, price-low, price-high, newest)
+- `page` - Səhifə nömrəsi
+- `per_page` - Səhifədə məhsul sayı
+
+**Nümunə:**
+```
+GET /az/category/geyim?min_price=50&max_price=200&sort=price-low&has_discount=1
+```
+
+---
+
+## ⚙️ Quraşdırma
+
+### Tələblər
+
+- PHP >= 8.2
+- Composer
+- MySQL >= 8.0
+- Node.js & NPM (frontend assets üçün)
+
+### Addımlar
+
+1. **Repository klonla:**
+```bash
+git clone https://github.com/your-repo/LeCharme.git
+cd LeCharme
+```
+
+2. **Dependencies quraşdır:**
+```bash
+composer install
+npm install
+```
+
+3. **Environment konfiqurasiyası:**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **Database:**
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+5. **Assets build et:**
+```bash
+npm run build
+```
+
+6. **Cache təmizlə:**
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+```
+
+---
+
+## 📖 İstifadə
+
+### Development Server
+
+```bash
+php artisan serve
+```
+
+### Frontend Assets Watch
+
+```bash
+npm run dev
+```
+
+---
+
+## 📚 Dokumentasiya
+
+- **[Filter API Documentation](docs/FILTER_API.md)** - Tam API dokumentasiyası
+- **[Laravel Documentation](https://laravel.com/docs)**
+
+---
+
+## 🧪 Testing
+
+```bash
+php artisan test
+```
+
+---
+
+## 📝 License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+## 👥 Contributors
+
+- Development Team
+
+---
+
+## 🔗 Links
+
+- [Laravel Documentation](https://laravel.com/docs)
+- [Filter API Docs](docs/FILTER_API.md)
+
+---
 
 ## About Laravel
 

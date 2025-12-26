@@ -200,236 +200,42 @@
                 <div class="swiper" id="product__slider__swiper">
                     <div class="swiper-wrapper">
 
-                        <!-- Product 1 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="1">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--new">Yeni</span>
-                                    <span class="product__slider__badge-item badge--discount">-25%</span>
-                                </div>
 
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
+                        @foreach ($products as $product)
 
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop"
-                                         alt="Premium Akıllı Saat"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            @lang('home.quick_view')
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Akıllı Saatler</span>
-                                    <h3 class="product__slider__card__title">Premium Akıllı Saat Pro</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(128)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺4.999</span>
-                                        <span class="product__slider__price-original">₺6.699</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>@lang('home.add_to_cart')</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Product 2 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="2">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--bestseller">Çok Satan</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop"
-                                         alt="Kablosuz Kulaklık"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            @lang('home.quick_view')
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Ses Sistemleri</span>
-                                    <h3 class="product__slider__card__title">Elite Kablosuz Kulaklık</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(256)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺2.499</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>@lang('home.add_to_cart')</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Product 3 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="3">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--limited">Sınırlı</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&h=600&fit=crop"
-                                         alt="Polaroid Kamera"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            @lang('home.quick_view')
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Fotoğrafçılık</span>
-                                    <h3 class="product__slider__card__title">Retro Polaroid Kamera - Limited Edition Özel Seri Vintage Koleksiyon</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(89)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺1.899</span>
-                                        <span class="product__slider__price-original">₺2.299</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>  @lang('home.add_to_cart')</span>
-
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Product 4 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="4">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--new">Yeni</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&h=600&fit=crop"
-                                         alt="Lüks Parfüm"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                           @lang('home.quick_view')
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Kozmetik</span>
-                                    <h3 class="product__slider__card__title">Signature Lüks Parfüm</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(312)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺3.299</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>@lang('home.add_to_cart')</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
 
                         <!-- Product 5 -->
                         <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="5">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--discount">-40%</span>
-                                </div>
+                            <article class="product__slider__card" data-product-id="{{ $product->id }}">
+                                @if($product->has_discount)
+                                    <div class="product__slider__card__badges">
+                                        <span class="product__slider__badge-item badge--discount">
+                                            {{ $product->discount_price }}
+                                        </span>
+                                    </div>
+                                @endif
 
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
+                              <x-favorite-button
+                                    :product-id="$product->id"
+                                    :is-favorite="isset($favorites[$product->id])"
+                                />
 
                                 <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=600&fit=crop"
+                                    <img src="{{ asset('/storage/products/' . $product->mainImage->image) }}"
                                          alt="Deri Çanta"
                                          loading="lazy">
                                     <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
-                                        </button>
+                                       <a href="{{ locale_route('product.detail', ['slug' => $product->localized_slug]) }}"
+                                            class="product__slider__btn-quick-view">
+                                                <i class="bi bi-eye"></i>
+                                                @lang('home.quick_view')
+                                            </a>
                                     </div>
                                 </figure>
 
                                 <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Aksesuar</span>
-                                    <h3 class="product__slider__card__title">El Yapımı Deri Çanta</h3>
+                                    <span class="product__slider__card__category">{{ $product->category->localized_name }}</span>
+                                    <h3 class="product__slider__card__title">{{ $product->localized_name }}</h3>
 
                                     <div class="product__slider__card__rating">
                                         <div class="product__slider__stars">
@@ -443,169 +249,39 @@
                                     </div>
 
                                     <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺1.799</span>
-                                        <span class="product__slider__price-original">₺2.999</span>
+                                       @if($product->has_discount)
+                                        <span class="product__slider__price-current">
+                                            {{ $product->discount_price_formatted }}
+                                            <small class="currency">AZN</small>
+                                        </span>
+
+                                        <span class="product__slider__price-original">
+                                            {{ $product->price_formatted }}
+                                            <small class="currency">AZN</small>
+                                        </span>
+                                    @else
+                                        <span class="product__slider__price-current">
+                                            {{ $product->price_formatted }}
+                                            <small class="currency">AZN</small>
+                                        </span>
+                                    @endif
                                     </div>
 
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Product 6 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="6">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--bestseller">Çok Satan</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
+                                   <button
+                                    type="button"
+                                    class="product__slider__card__add-to-cart"
+                                    data-id="{{ $product->id }}"
+                                >
+                                    <i class="bi bi-bag-plus"></i>
+                                    <span>@lang('home.add_to_cart')</span>
                                 </button>
 
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop"
-                                         alt="Spor Ayakkabı"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
-                                        </button>
-                                    </div>
-                                </figure>
 
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Ayakkabı</span>
-                                    <h3 class="product__slider__card__title">Ultra Comfort Spor</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(445)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺2.199</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
-                                    </button>
                                 </div>
                             </article>
                         </div>
+                        @endforeach
 
-                        <!-- Product 7 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="7">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--new">Yeni</span>
-                                    <span class="product__slider__badge-item badge--discount">-15%</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&h=600&fit=crop"
-                                         alt="Akıllı Bileklik"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Giyilebilir Teknoloji</span>
-                                    <h3 class="product__slider__card__title">Fitness Akıllı Bileklik</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(67)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺899</span>
-                                        <span class="product__slider__price-original">₺1.059</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Product 8 -->
-                        <div class="swiper-slide">
-                            <article class="product__slider__card" data-product-id="8">
-                                <div class="product__slider__card__badges">
-                                    <span class="product__slider__badge-item badge--limited">Son 5 Adet</span>
-                                </div>
-
-                                <button class="product__slider__card__wishlist" aria-label="Favorilere ekle">
-                                    <i class="bi bi-heart"></i>
-                                </button>
-
-                                <figure class="product__slider__card__image">
-                                    <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=600&h=600&fit=crop"
-                                         alt="Akıllı Telefon"
-                                         loading="lazy">
-                                    <div class="product__slider__card__overlay">
-                                        <button class="product__slider__btn-quick-view">
-                                            <i class="bi bi-eye"></i>
-                                            Hızlı Bakış
-                                        </button>
-                                    </div>
-                                </figure>
-
-                                <div class="product__slider__card__content">
-                                    <span class="product__slider__card__category">Telefon</span>
-                                    <h3 class="product__slider__card__title">Pro Max Akıllı Telefon</h3>
-
-                                    <div class="product__slider__card__rating">
-                                        <div class="product__slider__stars">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <span class="product__slider__rating-count">(521)</span>
-                                    </div>
-
-                                    <div class="product__slider__card__pricing">
-                                        <span class="product__slider__price-current">₺42.999</span>
-                                    </div>
-
-                                    <button class="product__slider__card__add-to-cart">
-                                        <i class="bi bi-bag-plus"></i>
-                                        <span>Sepete Ekle</span>
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
 
                     </div>
                 </div>
@@ -623,6 +299,10 @@
             </div>
         </div>
     </main>
+
+
+
+
 
 
 @endsection

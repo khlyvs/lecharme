@@ -74,10 +74,13 @@ class Product extends Model
         return $this->belongsTo(Subcategory::class)->withDefault();
     }
 
-    public function images()
-    {
-        return $this->hasMany(Image::class);
-    }
+   public function images()
+{
+    return $this->hasMany(Image::class)
+        ->orderByDesc('is_main')
+        ->orderBy('position');
+}
+
 
     public function mainImage()
     {
@@ -96,6 +99,32 @@ class Product extends Model
     return $this->discount_price && $this->discount_price < $this->price;
     }
 
+     public function getLocalizedNameAttribute()
+    {
+        $locale = app()->getLocale(); // 'az','en','ru'
+        return $this->{"name_{$locale}"} ;
+    }
+    public function getLocalizedDescriptionAttribute()
+    {
+        $locale = app()->getLocale(); // 'az','en','ru'
+        return $this->{"description_{$locale}"} ;
+    }
+
+     public function getLocalizedSlugAttribute()
+    {
+        $locale = app()->getLocale();
+        return $this->{"slug_{$locale}"};
+    }
+
+    public function getPriceFormattedAttribute(): string
+    {
+        return number_format($this->price, 0, '.', ' ') ;
+    }
+
+    public function getDiscountPriceFormattedAttribute(): string
+    {
+        return number_format($this->discount_price, 0, '.', ' ') ;
+    }
     /* =========================
      | SEO Accessors
      |========================= */
@@ -115,4 +144,51 @@ class Product extends Model
         return $this->{'meta_description_'.$locale}
             ?? str($this->{'description_'.$locale})->limit(160);
     }
+
+    public function scopeFilter($query, array $filters)
+{
+    return $query
+
+        // 🔍 Ada görə axtarış
+        ->when(!empty($filters['q']), function ($q) use ($filters) {
+            $search = $filters['q'];
+
+            $q->where(function ($qq) use ($search) {
+                $qq->where('name_az', 'like', "%{$search}%")
+                   ->orWhere('name_en', 'like', "%{$search}%")
+                   ->orWhere('name_ru', 'like', "%{$search}%");
+            });
+        })
+
+        // 📂 Kateqoriya
+        ->when(!empty($filters['category_id']),
+            fn ($q) => $q->where('category_id', $filters['category_id'])
+        )
+
+        // 💰 Min qiymət
+        ->when($filters['min_price'] !== null,
+            fn ($q) => $q->where('price', '>=', $filters['min_price'])
+        )
+
+        // 💰 Max qiymət
+        ->when($filters['max_price'] !== null,
+            fn ($q) => $q->where('price', '<=', $filters['max_price'])
+        )
+
+        // 🔄 Aktiv / Passiv (0 da işləsin!)
+        ->when(array_key_exists('status', $filters) && $filters['status'] !== null,
+            fn ($q) => $q->where('is_active', (int) $filters['status'])
+        );
+}
+
+        // Favotritlər əlaqəsi
+        public function favorites()
+        {
+            return $this->hasMany(Favorite::class);
+        }
+
+        public function baskets()
+        {
+            return $this->hasMany(Basket::class);
+        }
 }

@@ -20,7 +20,7 @@ class NormalizeLocalizedSlug
     if (!$route) return $next($request);
 
     $locale = app()->getLocale();
-    
+
     // Cache yoxdursa, yenidən yüklə
     $categories = Cache::get('menu.categories');
     if (!$categories) {
@@ -33,7 +33,7 @@ class NormalizeLocalizedSlug
         ->orderBy('position')
         ->where('is_active', 1)
         ->get();
-        
+
         // Cache-ə yaz
         Cache::forever('menu.categories', $categories);
     }
@@ -89,6 +89,33 @@ class NormalizeLocalizedSlug
             $request->attributes->set('resolved_subcategory', $sub);
         } else {
             // Subcategory tapılmadı, 404 qaytar
+            abort(404);
+        }
+    }
+
+    // PRODUCT
+    if ($route->getName() === 'product.detail') {
+        $slug = $route->parameter('slug');
+
+        $product = $resolver->resolveProduct($slug);
+
+        if ($product) {
+            $correct = $product->{"slug_$locale"};
+
+            if ($slug !== $correct) {
+                return redirect()->route(
+                    'product.detail',
+                    [
+                        'locale' => $locale,
+                        'slug'   => $correct
+                    ],
+                    301
+                );
+            }
+
+            // Controller üçün hazır product
+            $request->attributes->set('resolved_product', $product);
+        } else {
             abort(404);
         }
     }

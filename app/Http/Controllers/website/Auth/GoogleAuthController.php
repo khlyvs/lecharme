@@ -7,11 +7,19 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
+use App\Models\Favorite;
+use App\Services\Website\Favorite\FavoriteService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class GoogleAuthController extends Controller
 {
+
+    public function __construct(
+        protected FavoriteService $favoriteService
+    ) {}
+
+
     public function redirect()
     {
         return Socialite::driver('google')->redirect();
@@ -24,7 +32,7 @@ class GoogleAuthController extends Controller
         try {
 
             $googleUser = Socialite::driver('google')->user();
-
+            $guestSessionId = session()->getId();
             $user = User::firstOrCreate(
                 ['google_id' => $googleUser->getId()],
                 [
@@ -34,7 +42,10 @@ class GoogleAuthController extends Controller
                 ]
             );
 
+
             Auth::login($user);
+
+            $this->favoriteService->mergeGuestFavorites($guestSessionId);
 
             return redirect()->route('dashboard', ['locale' => $locale]);
 
